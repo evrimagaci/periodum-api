@@ -1,4 +1,6 @@
-# periodum-api
+# Periodum API
+
+![main workflow](https://github.com/evrimagaci/periodum-api/actions/workflows/main.yml/badge.svg)
 
 [Periodum](https://github.com/evrimagaci/periodum) project's backend.
 
