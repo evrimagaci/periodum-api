@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.swc/
+*.DS_Store
+db/

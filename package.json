@@ -1,0 +1,28 @@
+{
+  "name": "periodum_api",
+  "version": "1.0.0",
+  "description": "A database that compiles tons of information about elements and compounds.",
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix",
+    "build": "swc src -d dist",
+    "build-dev": "npm run build && NODE_ENV=development node --inspect dist/app.js",
+    "dev": "nodemon --ext ts --exec \"npm run build-dev\"",
+    "start": "npm run build && NODE_ENV=production node dist/app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.135",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.14",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^8.8.0",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.5.5"
+  }
+}
