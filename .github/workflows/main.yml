@@ -1,0 +1,30 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Periodum CI
+
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install 3rd party libraries
+        run: npm install
+
+      - name: Checking syntax
+        run: run lint
+
+      - name: Building the project
+        run: run build
