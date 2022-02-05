@@ -34,7 +34,7 @@ docker-compose --env-file ./dev.env up -d app --build
 
 - `--build` _arg_ is required when you need to install new package unless you install inside the container.
 
-- You can connect the running container via VSCode without install node or anything on your machine. Just attach to the Periodum API container after running the container. More: https://code.visualstudio.com/docs/remote/containers
+- You can connect to the [running container via VSCode](https://code.visualstudio.com/docs/remote/containers) without installing NodeJS or any other dependencies on your machine. Just attach to the Periodum API container after running the container.
 
 ## Contribution Guidelines
 Please follow the same [guidelines](https://github.com/evrimagaci/periodum/blob/main/CONTRIBUTING.md)  with [the main project](https://github.com/evrimagaci/periodum/).
