@@ -27,7 +27,7 @@ jobs:
         run: npm install -D
 
       - name: Checking syntax
-        run: run lint
+        run: npm run lint
 
       - name: Building the project
-        run: run build
+        run: npm run build
