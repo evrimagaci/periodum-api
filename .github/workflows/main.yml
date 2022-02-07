@@ -22,12 +22,15 @@ jobs:
 
       - name: Install 3rd party libraries
         run: npm install
-        
+
       - name: Install Developer Dependencies
         run: npm install -D
 
       - name: Checking syntax
         run: npm run lint
+
+      - name: Run the test
+        run: npm test
 
       - name: Building the project
         run: npm run build
