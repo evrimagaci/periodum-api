@@ -1,0 +1,263 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model compounds {
+  id                                     Int     @id @default(autoincrement()) @db.UnsignedInt
+  number_of_atom_stereocenters           Int     @db.UnsignedTinyInt
+  number_of_bond_stereocenters           Int     @db.UnsignedTinyInt
+  cas_number                             String? @default("") @db.Char(11)
+  structure_evaluation                   String? @db.Text
+  formula                                String? @db.VarChar(100)
+  molecular_weight                       Float?
+  dtp_names                              String? @db.Text
+  NCICADD_FICUS_ID                       String? @db.Text
+  NCICADD_FICTS_ID                       String? @db.Text
+  NCICADD_UUUUU_ID                       String? @db.Text
+  standard_in_chi                        String? @db.Text
+  standard_in_chi_key                    String? @db.Text
+  smiles                                 String? @db.Text
+  full_atom_and_bond_stereospecification String? @db.Text
+
+  @@index([formula], map: "compounds_formula_index")
+}
+
+model elements {
+  number                                  Int     @id
+  name_tr                                 String? @db.Text
+  name_en                                 String? @db.Text
+  alternate_name                          String? @db.Text
+  symbol                                  String? @db.Text
+  cas_number                              String? @db.Text
+  cid_number                              String? @db.Text
+  dot_number                              String? @db.Text
+  rtecs_number                            String? @db.Text
+  mendeleev_number                        Int?
+  pettifor_number                         Int?
+  eu_number                               String? @db.Text
+  space_group_number                      String? @db.Text
+  glawe_number                            Int?
+  atomic_mass                             String? @db.Text
+  atomic_mass_uncertainty                 String? @db.Text
+  xpos                                    Int?
+  ypos                                    Int?
+  period                                  Int?
+  group                                   String? @db.Text
+  block                                   String? @db.Text
+  category                                String? @db.Text
+  electrical_type                         String? @db.Text
+  geochemical_class                       String? @db.Text
+  goldschmidt_class                       String? @db.Text
+  gas_phase                               String? @db.Text
+  allotrope_names                         String? @db.Text
+  appearance                              String? @db.Text
+  abundance_in_earth_crust_c1             String? @db.Text
+  abundance_in_earth_crust_c2             String? @db.Text
+  abundance_in_earth_crust_c3             String? @db.Text
+  abundance_in_earth_crust_c4             String? @db.Text
+  abundance_in_earth_crust_c5             String? @db.Text
+  abundance_in_earth_crust_c6             String? @db.Text
+  abundance_in_earth_crust_u1             String? @db.Text
+  abundance_in_earth_crust_u2             String? @db.Text
+  abundance_urban_soil                    String? @db.Text
+  abundance_meteorite                     String? @db.Text
+  abundance_seawater_w1                   String? @db.Text
+  abundance_seawater_w2                   String? @db.Text
+  abundance_humans                        String? @db.Text
+  abundance_in_humans_2                   String? @db.Text
+  abundance_sun_s1                        String? @db.Text
+  abundance_solar_system_y1               String? @db.Text
+  abundance_solar_system_y2               String? @db.Text
+  atomic_radius_empirical                 String? @db.Text
+  atomic_radius_calculated                String? @db.Text
+  atomic_radius_vanderwaals               String? @db.Text
+  vdw_radius_bondi                        String? @db.Text
+  vdw_radius_truhlar                      String? @db.Text
+  vdw_radius_rt                           String? @db.Text
+  atomic_radius_rahm                      String? @db.Text
+  vdw_radius_batsanov                     String? @db.Text
+  vdw_radius_dreiding                     String? @db.Text
+  vdw_radius_uff                          String? @db.Text
+  vdw_radius_mm3                          String? @db.Text
+  vdw_radius_alvarez                      String? @db.Text
+  covalent_radius_bragg                   String? @db.Text
+  atomic_radius_covalent_single_bond      String? @db.Text
+  atomic_radius_covalent_triple_bond      String? @db.Text
+  covalent_radius_cordero                 String? @db.Text
+  covalent_radius_pyykko                  Int?
+  covalent_radius_pyykko_double           String? @db.Text
+  covalent_radius_pyykko_triple           String? @db.Text
+  metallic_radius_mendeleev               String? @db.Text
+  metallic_radius_c12                     String? @db.Text
+  atomic_radius_metallic                  String? @db.Text
+  jmol_color                              String? @db.Text
+  molcas_gv_color                         String? @db.Text
+  cpk_color                               String? @db.Text
+  refractive_index                        String? @db.Text
+  phase_at_stp                            String? @db.Text
+  melt_use                                String? @db.Text
+  melt_WEL                                String? @db.Text
+  melt_CRC                                String? @db.Text
+  melt_LNG                                String? @db.Text
+  boil_use                                String? @db.Text
+  boil_WEL                                String? @db.Text
+  boil_CRC                                String? @db.Text
+  boil_LNG                                String? @db.Text
+  boil_Zhang                              String? @db.Text
+  curie_point                             String? @db.Text
+  critical_temperature                    String? @db.Text
+  flashpoint                              String? @db.Text
+  superconducting_point                   String? @db.Text
+  autoignition_point                      String? @db.Text
+  critical_pressure                       String? @db.Text
+  density_rt                              String? @db.Text
+  density_solid_WEL                       String? @db.Text
+  density_solid_LNG                       String? @db.Text
+  density_solid_CRC                       String? @db.Text
+  density_liquid_cr2                      String? @db.Text
+  density_gas                             String? @db.Text
+  molar_volume                            String? @db.Text
+  atomic_volume                           String? @db.Text
+  enthalpy_of_fusion                      String? @db.Text
+  heat_of_fusion_crc                      String? @db.Text
+  heat_of_fusion_lng                      String? @db.Text
+  heat_of_fusion_wel                      String? @db.Text
+  evaporation_heat                        String? @db.Text
+  heat_of_vaporization_crc                String? @db.Text
+  heat_of_vaporization_lng                String? @db.Text
+  heat_of_vaporization_wel                String? @db.Text
+  heat_of_vaporization_zhang              String? @db.Text
+  heat_of_combustion                      String? @db.Text
+  molar_heat                              String? @db.Text
+  specific_heat_capacity                  String? @db.Text
+  specific_heat_crc                       String? @db.Text
+  specific_heat_wel                       String? @db.Text
+  specific_heat_lng                       String? @db.Text
+  thermal_conductivity                    String? @db.Text
+  thermal_expansion                       String? @db.Text
+  adiabatic_index                         String? @db.Text
+  speed_of_sound_longitudinal             String? @db.Text
+  speed_of_sound_transversal              String? @db.Text
+  speed_of_sound_extensional              String? @db.Text
+  speed_of_sound_fluid                    String? @db.Text
+  electrical_resistivity_80K              String? @db.Text
+  electrical_resistivity_273K             String? @db.Text
+  electrical_resistivity_293K             String? @db.Text
+  electrical_resistivity_298K             String? @db.Text
+  electrical_resistivity_300K             String? @db.Text
+  electrical_resistivity_500K             String? @db.Text
+  magnetic_ordering                       String? @db.Text
+  neel_point                              String? @db.Text
+  magnetic_susceptibility                 String? @db.Text
+  shear_modulus                           String? @db.Text
+  bulk_modulus                            String? @db.Text
+  poisson_ratio                           String? @db.Text
+  youngs_modulus                          String? @db.Text
+  mohs_hardness                           String? @db.Text
+  brinell_hardness                        String? @db.Text
+  vickers_hardness                        String? @db.Text
+  description                             String? @db.Text
+  language_of_origin                      String? @db.Text
+  origin_of_word                          String? @db.Text
+  original_word                           String? @db.Text
+  meaning                                 String? @db.Text
+  symbol_origin                           String? @db.Text
+  etymological_description                String? @db.Text
+  observed_predicted_by                   String? @db.Text
+  observation_or_discovery_year           String? @db.Text
+  discovery_location                      String? @db.Text
+  isolated_sampled_by                     String? @db.Text
+  isolation_sample_year                   String? @db.Text
+  named_by                                String? @db.Text
+  sources                                 String? @db.Text
+  uses                                    String? @db.Text
+  spectral_img                            String? @db.Text
+  is_radioactive                          Int?
+  decay_mode                              String? @db.Text
+  half_life                               String? @db.Text
+  lifetime                                String? @db.Text
+  neutron_mass_absorption                 String? @db.Text
+  neutron_cross_section                   String? @db.Text
+  proton_affinity                         String? @db.Text
+  electron_affinity_eV                    String? @db.Text
+  electron_affinity_kJmol                 String? @db.Text
+  electronegativity_pauling               String? @db.Text
+  electronegativity_allen                 String? @db.Text
+  electronegativity_ghosh                 String? @db.Text
+  dipole_polarizability                   String? @db.Text
+  dipole_polarizability_unc               String? @db.Text
+  c6_gb                                   String? @db.Text
+  c6_coeff                                String? @db.Text
+  lattice_constant_internal_default_radii String? @db.Text
+  lattice_constant                        String? @db.Text
+  lattice_structure                       String? @db.Text
+  lattice_angles                          String? @db.Text
+  oxidation_states                        String? @db.Text
+  electron_configuration                  String? @db.Text
+  quantum_number                          String? @db.Text
+  electron_configuration_semantic         String? @db.Text
+  shells_0                                Int?    @map("shells-0")
+  shells_1                                Int?    @map("shells-1")
+  shells_2                                Int?    @map("shells-2")
+  shells_3                                Int?    @map("shells-3")
+  shells_4                                Int?    @map("shells-4")
+  shells_5                                Int?    @map("shells-5")
+  shells_6                                Int?    @map("shells-6")
+  shells_7                                Int?    @map("shells-7")
+  ionization_energies_0                   String? @map("ionization_energies-0") @db.Text
+  ionization_energies_1                   String? @map("ionization_energies-1") @db.Text
+  ionization_energies_2                   String? @map("ionization_energies-2") @db.Text
+  ionization_energies_3                   String? @map("ionization_energies-3") @db.Text
+  ionization_energies_4                   String? @map("ionization_energies-4") @db.Text
+  ionization_energies_5                   String? @map("ionization_energies-5") @db.Text
+  ionization_energies_6                   String? @map("ionization_energies-6") @db.Text
+  ionization_energies_7                   String? @map("ionization_energies-7") @db.Text
+  ionization_energies_8                   String? @map("ionization_energies-8") @db.Text
+  ionization_energies_9                   String? @map("ionization_energies-9") @db.Text
+  ionization_energies_10                  String? @map("ionization_energies-10") @db.Text
+  ionization_energies_11                  String? @map("ionization_energies-11") @db.Text
+  ionization_energies_12                  String? @map("ionization_energies-12") @db.Text
+  ionization_energies_13                  String? @map("ionization_energies-13") @db.Text
+  ionization_energies_14                  String? @map("ionization_energies-14") @db.Text
+  ionization_energies_15                  String? @map("ionization_energies-15") @db.Text
+  ionization_energies_16                  String? @map("ionization_energies-16") @db.Text
+  ionization_energies_17                  String? @map("ionization_energies-17") @db.Text
+  ionization_energies_18                  String? @map("ionization_energies-18") @db.Text
+  ionization_energies_19                  String? @map("ionization_energies-19") @db.Text
+  ionization_energies_20                  String? @map("ionization_energies-20") @db.Text
+  ionization_energies_21                  String? @map("ionization_energies-21") @db.Text
+  ionization_energies_22                  String? @map("ionization_energies-22") @db.Text
+  ionization_energies_23                  String? @map("ionization_energies-23") @db.Text
+  ionization_energies_24                  String? @map("ionization_energies-24") @db.Text
+  ionization_energies_25                  String? @map("ionization_energies-25") @db.Text
+  ionization_energies_26                  String? @map("ionization_energies-26") @db.Text
+  ionization_energies_27                  String? @map("ionization_energies-27") @db.Text
+  ionization_energies_28                  String? @map("ionization_energies-28") @db.Text
+  ionization_energies_29                  String? @map("ionization_energies-29") @db.Text
+  wikipedia                               String? @db.Text
+  ea_content_id                           Int?
+}
+
+model isotopes {
+  id                      Int      @id @default(0)
+  atomic_number_unique    Int?
+  known_isotopes          String?  @db.Text
+  stable_isotopes         String?  @db.Text
+  is_monoisotopic         Boolean?
+  atomic_number_notunique Int?
+  mass                    Float?
+  abundance               Float?
+  mass_number             Int?
+  mass_uncertainty        String?  @db.VarChar(30)
+  is_radioactive          Boolean?
+  half_life               String?  @db.VarChar(30)
+  half_life_unit          String?  @db.VarChar(30)
+  spin                    Float?
+  g_factor                Float?
+  quadrupole_moment       Float?
+}

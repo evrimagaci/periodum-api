@@ -3,3 +3,4 @@ dist/
 .swc/
 *.DS_Store
 db/
+.env
