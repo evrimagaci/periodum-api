@@ -7,7 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model compounds {
+model Compounds {
   id                                     Int     @id @default(autoincrement()) @db.UnsignedInt
   number_of_atom_stereocenters           Int     @db.UnsignedTinyInt
   number_of_bond_stereocenters           Int     @db.UnsignedTinyInt
@@ -27,7 +27,7 @@ model compounds {
   @@index([formula], map: "compounds_formula_index")
 }
 
-model elements {
+model Elements {
   number                                  Int     @id
   name_tr                                 String? @db.Text
   name_en                                 String? @db.Text
@@ -243,7 +243,7 @@ model elements {
   ea_content_id                           Int?
 }
 
-model isotopes {
+model Isotopes {
   id                      Int      @id @default(0)
   atomic_number_unique    Int?
   known_isotopes          String?  @db.Text
