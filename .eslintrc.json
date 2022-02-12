@@ -12,7 +12,7 @@
 			"error"
 		],
 		"no-extra-semi": "warn",
-		"semi": "warn"
+		"semi": "error"
 	},
 	"plugins": [
 		"@typescript-eslint"
