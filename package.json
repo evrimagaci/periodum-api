@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "A database that compiles tons of information about elements and compounds.",
 	"scripts": {
+		"prepare": "husky install",
 		"lint": "eslint . --ext .ts",
 		"lint-fix": "eslint . --ext .ts --fix",
 		"prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
