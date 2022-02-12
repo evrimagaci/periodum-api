@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: "periodum_api"
+    scrape_interval: 3s
+    static_configs:
+      - targets: ["periodum_api:3000"]
+
+  - job_name: "node"
+    static_configs:
+      - targets: ["node-exporter:9100"]

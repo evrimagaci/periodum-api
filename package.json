@@ -13,7 +13,8 @@
     "test:watch": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\" -w --watch-files \"test/**/*.spec.ts\",\"src/**/*.ts\""
   },
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "prom-client": "^14.0.1"
   },
   "type": "module",
   "devDependencies": {
