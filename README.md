@@ -38,6 +38,40 @@ docker-compose --env-file ./dev.env up -d app --build
 
 - You can connect to the [running container via VSCode](https://code.visualstudio.com/docs/remote/containers) without installing NodeJS or any other dependencies on your machine. Just attach to the Periodum API container after running the container.
 
+### Importing the data
+Please apply steps below one by one on the root folder of the project.
+
+```bash
+# Keep the db container running (background)
+docker-compose --env-file ./dev.env up -d db
+
+# Create the `db` folder if not exists
+mkdir db
+
+# Download the DB file
+wget https://evrimagaci.org/public/periodum/db.sql.zip -P db/
+
+# Unzip the archived file
+unzip db/db.sql.zip -d db/
+
+# Load the environment variable into the memory
+# so that we can use it for the import
+source dev.env
+
+# Ensure that db running and accepting the connection
+docker-compose logs db
+
+# Finally, we shall import the data into the database
+# This operation might take some time
+docker-compose exec -T db mysql -u root -p"$DB_ROOT_PASSWORD" "$DB_NAME" < db/db.sql
+
+# Now, you may run the app with confidence
+docker-compose --env-file ./dev.env up app
+
+# Clean up
+rm db/db.sql
+rm db/db.sql.zip
+```
 ## Contribution Guidelines
 Please follow the same [guidelines](https://github.com/evrimagaci/periodum/blob/main/CONTRIBUTING.md)  with [the main project](https://github.com/evrimagaci/periodum/).
 
