@@ -1,13 +1,13 @@
 import { PrismaClient } from '@prisma/client';
-import express, { Application, Response } from "express";
+import express, { Application, Response } from 'express';
 
 const PORT = process.env.PORT || 3000;
 
 const app: Application = express();
 const prisma = new PrismaClient();
 
-app.get("/", (_, res: Response) => {
-	res.status(200).send("Hello Periodum API!");
+app.get('/', (_, res: Response) => {
+	res.status(200).send('Hello Periodum API!');
 });
 
 app.get('/elements', async (_, res: Response) => {
