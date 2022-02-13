@@ -10,7 +10,8 @@
 		"dev": "nodemon --ext ts --exec ts-node src/app.ts",
 		"start": "NODE_ENV=production ts-node src/app.ts",
 		"test": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\"",
-		"test:watch": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\" -w --watch-files \"test/**/*.spec.ts\",\"src/**/*.ts\""
+		"test:watch": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\" -w --watch-files \"test/**/*.spec.ts\",\"src/**/*.ts\"",
+		"postinstall": "prisma generate"
 	},
 	"husky": {
 		"hooks": {
