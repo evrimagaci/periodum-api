@@ -75,7 +75,7 @@ rm db/db*
 ## Contribution Guidelines
 Please follow the same [guidelines](https://github.com/evrimagaci/periodum/blob/main/CONTRIBUTING.md)  with [the main project](https://github.com/evrimagaci/periodum/).
 
-## TL;DR
+### TL;DR
 - Fork the repository
 - Create a `feature` or `bugfix` branch from the `develop` branch (ex: `feature/awesome-feature`) on your fork.
 - Work on your new branch
