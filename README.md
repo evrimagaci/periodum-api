@@ -18,6 +18,7 @@ After you have required tech stack above, feel free to run it like this.
 
 ```bash
 npm install && \
+npx prisma generate && \
 npm run dev
 ```
 ### Run inside Docker

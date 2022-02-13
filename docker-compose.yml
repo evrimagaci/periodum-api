@@ -15,7 +15,7 @@ services:
       - ./src:/usr/app/src
     ports:
       - "127.0.0.1:${NODEJS_PORT}:3000"
-      - "127.0.0.1:5555:5555" # Prisma Studioå
+      - "127.0.0.1:5555:5555" # Prisma Studio
     depends_on:
       - db
     restart: unless-stopped
@@ -30,6 +30,6 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASSWORD}
-    # ports:
-    #   - "127.0.0.1:${DB_PORT}:3306" # Container port depends on DB PROVIDER. Can be read .env
+    # ports: #enable ports if you work locally
+      # - "127.0.0.1:${DB_PORT}:3306" # Container port depends on DB PROVIDER. Can be read .env
     restart: unless-stopped
