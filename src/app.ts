@@ -1,5 +1,5 @@
 import express, { Application, Response } from "express";
-import {monitorService} from "./Monitoring/monitoring.js";
+import {monitorService} from "./monitoring";
 
 const PORT = process.env.PORT || 3000;
 const app: Application = express();
