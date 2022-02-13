@@ -69,8 +69,7 @@ docker-compose exec -T db mysql -u root -p"$DB_ROOT_PASSWORD" "$DB_NAME" < db/db
 docker-compose --env-file ./dev.env up app
 
 # Clean up
-rm db/db.sql
-rm db/db.sql.zip
+rm db/db*
 ```
 ## Contribution Guidelines
 Please follow the same [guidelines](https://github.com/evrimagaci/periodum/blob/main/CONTRIBUTING.md)  with [the main project](https://github.com/evrimagaci/periodum/).
