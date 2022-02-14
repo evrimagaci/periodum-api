@@ -19,7 +19,7 @@ class Logging {
 
 				res.status(500).json(defaultErrorResponse);
 			} else {
-				const log = this.CreateLog(JSON.stringify(data), data.err, req, res);
+				const log = this.CreateLog(JSON.stringify(data), `${data.err} => ${data.err.stack}`, req, res);
 				console.log(log);
 				//TODO: do something with log. write it in a db or maybe send an elastic search instance
 
