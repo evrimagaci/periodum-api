@@ -2,6 +2,7 @@ import express from "express";
 
 class Logging {
 	RequestResponseLogger = (data: any, req:express.Request, res:express.Response, _next:express.NextFunction) => {
+		this.ClearResponseBeforeSend(res);
 		if (data.success) {
 			const log = this.CreateLog(JSON.stringify(data), null, req, res);
 			console.log(log);
@@ -23,12 +24,7 @@ class Logging {
 				console.log(log);
 				//TODO: do something with log. write it in a db or maybe send an elastic search instance
 
-				const oldSend = res.json;
-				res.json = function(data) {
-					delete data.err;
-					res.json = oldSend;
-					return res.json(data);
-				};
+
 				res.status(data.statusCode).json(data);
 			}
 		}
@@ -49,7 +45,17 @@ class Logging {
 			//UserId: req.user ? req.user.Id : undefined,
 			//SessionId: req.user ? req.user.Session.Id : undefined,
 		};
-	}
+	};
+
+	private ClearResponseBeforeSend = (res:express.Response) => {
+		const oldSend = res.json;
+		res.json = function(data) {
+			delete data.err;
+			delete data.statusCode;
+			res.json = oldSend;
+			return res.json(data);
+		};
+	};
 }
 
 export const loggingMiddleware = new Logging();
