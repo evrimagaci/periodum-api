@@ -16,5 +16,7 @@ COPY . .
 RUN chown -R node: /usr/app
 USER node
 
+RUN npx prisma generate
+
 EXPOSE 8080
 CMD ["npm", "run", "dev"]

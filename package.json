@@ -1,36 +1,43 @@
 {
-  "name": "periodum_api",
-  "version": "1.0.0",
-  "description": "A database that compiles tons of information about elements and compounds.",
-  "scripts": {
-    "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --ext .ts --fix",
-    "build": "swc src -d dist",
-    "build-dev": "npm run build && NODE_ENV=development node --inspect dist/app.js",
-    "dev": "nodemon --ext ts --exec \"npm run build-dev\"",
-    "start": "npm run build && NODE_ENV=production node dist/app.js",
-    "test": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\"",
-    "test:watch": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\" -w --watch-files \"test/**/*.spec.ts\",\"src/**/*.ts\""
-  },
-  "dependencies": {
-    "express": "^4.17.2"
-  },
-  "type": "module",
-  "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.135",
-    "@types/chai": "^4.3.0",
-    "@types/express": "^4.17.13",
-    "@types/mocha": "^9.1.0",
-    "@types/node": "^17.0.14",
-    "@typescript-eslint/eslint-plugin": "^5.10.2",
-    "@typescript-eslint/parser": "^5.10.2",
-    "chai": "^4.3.6",
-    "eslint": "^8.8.0",
-    "mocha": "^9.2.0",
-    "nodemon": "^2.0.15",
-    "ts-mocha": "^9.0.2",
-    "tsconfig-paths": "^3.12.0",
-    "typescript": "^4.5.5"
-  }
+	"name": "periodum_api",
+	"version": "1.0.0",
+	"description": "A database that compiles tons of information about elements and compounds.",
+	"scripts": {
+		"prepare": "husky install",
+		"lint": "eslint . --ext .ts",
+		"lint-fix": "eslint . --ext .ts --fix",
+		"prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+		"dev": "nodemon --ext ts --exec ts-node src/app.ts",
+		"start": "NODE_ENV=production ts-node src/app.ts",
+		"test": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\"",
+		"test:watch": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\" -w --watch-files \"test/**/*.spec.ts\",\"src/**/*.ts\"",
+		"postinstall": "prisma generate"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run prettier-format && npm run lint"
+		}
+	},
+	"dependencies": {
+		"@prisma/client": "^3.9.2",
+		"express": "^4.17.2"
+	},
+	"devDependencies": {
+		"@types/chai": "^4.3.0",
+		"@types/express": "^4.17.13",
+		"@types/mocha": "^9.1.0",
+		"@types/node": "^17.0.14",
+		"@typescript-eslint/eslint-plugin": "^5.10.2",
+		"@typescript-eslint/parser": "^5.10.2",
+		"chai": "^4.3.6",
+		"eslint": "^8.8.0",
+		"husky": "^7.0.4",
+		"mocha": "^9.2.0",
+		"nodemon": "^2.0.15",
+		"prettier": "^2.5.1",
+		"prisma": "^3.9.2",
+		"ts-mocha": "^9.0.2",
+		"tsconfig-paths": "^3.12.0",
+		"typescript": "^4.5.5"
+	}
 }

@@ -9,16 +9,27 @@ services:
       args:
         - NODEJS_VERSION=${NODEJS_VERSION}
         - NODE_ENV=${NODE_ENV}
+    environment:
+        - DATABASE_URL=${DB_PROVIDER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
     volumes:
       - ./src:/usr/app/src
     ports:
       - "127.0.0.1:${NODEJS_PORT}:3000"
+      - "127.0.0.1:5555:5555" # Prisma Studio
     depends_on:
       - db
     restart: unless-stopped
   db:
-    image: "mongo:${MONGO_DB_VERSION}"
+    image: "${DB_PROVIDER}:${DB_VERSION}"
+    platform: linux/x86_64 # This is a workaround for Apple's Silicon CPUs. M1 etc.
     container_name: periodum_db
     volumes:
-        - ./db/mongodb:/data/db
+        - ./db/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    # ports: #enable ports if you work locally
+      # - "127.0.0.1:${DB_PORT}:3306" # Container port depends on DB PROVIDER. Can be read .env
     restart: unless-stopped
