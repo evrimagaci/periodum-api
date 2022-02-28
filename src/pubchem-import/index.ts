@@ -1,4 +1,6 @@
 import fetch from "node-fetch";
+// import type { PubChemCompound } from "./types";
+// import getNecessaryData from "./parseData.js";
 import { RateLimiter } from "limiter";
 import { RawCompound } from "./types";
 import getNecessaryData from "./parseData.js";
@@ -25,9 +27,10 @@ async function init() {
 
 	const limiter = new RateLimiter({ tokensPerInterval: 1, interval: 250 });
 
-	async function throttleRequest(id: number) {
-		await limiter.removeTokens(1);
-
+	async function sendMessage(id: number) {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const remainingMessages = await limiter.removeTokens(1);
+		// const id = getId();
 		if (id === undefined) {
 			return;
 		}
@@ -36,8 +39,7 @@ async function init() {
 	}
 
 	ids.forEach(async (id) => {
-		await throttleRequest(id).then((e) => {
-			//eslint-disable-next-line
+		await sendMessage(id).then((e) => {
 			console.log(e?.RecordTitle);
 		});
 	});
