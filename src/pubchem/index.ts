@@ -14,7 +14,11 @@ async function fetchJson(compoundId: number): Promise<RawCompound> {
 	).json()) as Promise<RawCompound>;
 }
 
-async function init() {
+export default async function init(
+	startId: number,
+	endId: number,
+	compoundId: number
+) {
 	const ids: number[] = [];
 
 	for (let i = compoundId; i < compoundId + (endId - startId + 1); i++) {
@@ -45,4 +49,4 @@ async function init() {
 	});
 }
 
-init();
+init(startId, endId, compoundId);

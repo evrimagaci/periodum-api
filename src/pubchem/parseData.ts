@@ -596,6 +596,12 @@ const dataPaths: {
 	}
 ];
 
+const removeDuplicates = (array: Record<string, unknown>[]) => {
+	return array.filter((item, index) => {
+		return array.indexOf(item) === index;
+	});
+};
+
 const findSection =
 	(parentSection: BaseSection<string> | PubChemCompound) =>
 	(targetSectionHeading: string) =>
@@ -606,9 +612,8 @@ const getFromObject = (
 	path: string
 ): Record<string, unknown> | Record<string, unknown>[] => {
 	if (Array.isArray(obj)) {
-		return [...new Set(obj.map((x) => getFromObject(x, path)).flat())].filter(
-			(x) => x !== undefined
-		);
+		const result = [...obj.map((x) => getFromObject(x, path)).flat()];
+		return removeDuplicates(result).filter((x) => x !== undefined);
 	}
 	return obj[path];
 };
