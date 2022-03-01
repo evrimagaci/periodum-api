@@ -1,5 +1,5 @@
 import { Express, Request, Response, NextFunction } from 'express';
-import ElementController from './controller/element.controller';
+import ElementController from './controllers/element.controller';
 import { expressMiddleware, expressErrorHandler } from '@appsignal/express';
 import { Appsignal } from '@appsignal/nodejs';
 

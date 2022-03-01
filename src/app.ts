@@ -1,4 +1,4 @@
-import { appsignal } from './logger/appsignal';
+import { appsignal } from './utils/logger/appsignal';
 import express from 'express';
 import routes from './routes';
 

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import log from '../logger';
-import ElementService from '../service/element.service';
+import log from '../utils/logger';
+import ElementService from '../services/element.service';
 
 class ElementController {
 	service: ElementService;
