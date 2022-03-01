@@ -2,13 +2,15 @@
 	"name": "periodum_api",
 	"version": "1.0.0",
 	"description": "A database that compiles tons of information about elements and compounds.",
+	"main": "dist/app.js",
 	"scripts": {
 		"prepare": "husky install",
 		"lint": "eslint . --ext .ts",
 		"lint-fix": "eslint . --ext .ts --fix",
 		"prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
-		"dev": "nodemon --ext ts --exec ts-node src/app.ts",
-		"start": "NODE_ENV=production ts-node src/app.ts",
+		"dev": "nodemon --config nodemon.json src/app.ts",
+		"build": "tsc",
+		"start": "NODE_ENV=production node  dist/app.js",
 		"test": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\"",
 		"test:watch": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\" -w --watch-files \"test/**/*.spec.ts\",\"src/**/*.ts\"",
 		"postinstall": "prisma generate"

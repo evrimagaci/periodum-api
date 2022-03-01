@@ -1,13 +1,18 @@
 {
+	"files": [
+		"src/app.ts",
+	],
+	"exclude": [
+		"test"
+	],
 	"compilerOptions": {
 		"strict": true,
-		"lib": [
-			"esnext"
-		],
+		"target": "es2016",
+		"outDir": "./dist",
+		"rootDir": "./src",
 		"baseUrl": "./src",
-		"rootDirs": [
-			"./src"
-		],
+		"module": "commonjs", /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
+		"moduleResolution": "node",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
 		"strictPropertyInitialization": true, /* Check for class properties that are declared but not set in the constructor. */
