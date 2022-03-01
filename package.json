@@ -10,7 +10,7 @@
 		"prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
 		"dev": "nodemon --config nodemon.json src/app.ts",
 		"build": "tsc",
-		"start": "NODE_ENV=production node  dist/app.js",
+		"start": "NODE_ENV=production node dist/app.js",
 		"test": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\"",
 		"test:watch": "NODE_ENV=test mocha --check-leaks -r ts-node/register -r tsconfig-paths/register \"test/**/*.spec.ts\" -w --watch-files \"test/**/*.spec.ts\",\"src/**/*.ts\"",
 		"postinstall": "prisma generate"
@@ -21,6 +21,8 @@
 		}
 	},
 	"dependencies": {
+		"@appsignal/express": "^1.0.26",
+		"@appsignal/nodejs": "^2.3.2",
 		"@prisma/client": "^3.9.2",
 		"express": "^4.17.2"
 	},

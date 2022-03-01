@@ -1,19 +1,11 @@
-import { PrismaClient } from '@prisma/client';
-import express, { Application, Response } from 'express';
+import { appsignal } from './utils/logger/appsignal';
+import express from 'express';
+import routes from './routes';
 
 const PORT = process.env.PORT || 3000;
+const app = express();
 
-const app: Application = express();
-const prisma = new PrismaClient();
-
-app.get('/', (_, res: Response) => {
-	res.status(200).send('Hello Periodum API!');
-});
-
-app.get('/elements', async (_, res: Response) => {
-	const elements = await prisma.elements.findMany();
-	res.json({ data: elements });
-});
+routes(app, appsignal);
 
 app.listen(PORT, () => {
 	// eslint-disable-next-line no-console
