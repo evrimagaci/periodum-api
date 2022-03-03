@@ -25,6 +25,7 @@
 		"@appsignal/nodejs": "^2.3.2",
 		"@prisma/client": "^3.9.2",
 		"express": "^4.17.2",
+		"limiter": "^2.1.0",
 		"node-fetch": "^3.2.1"
 	},
 	"devDependencies": {
