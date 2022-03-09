@@ -13,7 +13,8 @@ export default function (app: Express, appsignal: Appsignal) {
 		res.status(200).json({ message: 'Hello from Periodum API!' });
 	});
 
-	app.get('/elements', elementController.getList);
+	app.get('/elements', elementController.getElements);
+	app.get('/elements/:id', elementController.getElementById);
 
 	httpsRedirection(app);
 
