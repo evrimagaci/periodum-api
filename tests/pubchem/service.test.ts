@@ -14,6 +14,11 @@ describe('PubChem API Tests', () => {
 	it('should parse RawCompund properly', async () => {
 		const service = new PubChemService();
 		const data = await service.getCompoundById(222);
-		expect(data).toBeTruthy();
+		expect(data.RecordTitle).toEqual('Ammonia');
+		// FIX: Validate the data
+		// expect(data.Section[0].TOCHeading).toEqual('Chemical Safety');
+		// expect(
+		// 	data.Section[1].Information[0].Value.StringWithMarkup[0].Markup[0].Extra
+		// ).toEqual('Corrosive');
 	});
 });
