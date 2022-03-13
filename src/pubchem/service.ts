@@ -26,7 +26,7 @@ class PubChemService {
 		}
 		return this.getCompoundById(id)
 			.then((res) => {
-				return getNecessaryData(res);
+				return res;
 			})
 			.catch((e) => {
 				//eslint-disable-next-line
