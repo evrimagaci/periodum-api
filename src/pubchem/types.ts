@@ -42,7 +42,7 @@ export interface BaseSection<T, U = string> {
 	Information: Information[];
 	Section?: BaseSection<U>[];
 }
-export type ChemicalSafety = BaseSection<'Chemical Safety'>;
+export type RawChemicalSafety = BaseSection<'Chemical Safety'>;
 
 export interface NamesAndIdentifiers
 	extends BaseSection<'Names and Identifiers'> {
@@ -137,7 +137,7 @@ export interface PubChemCompound {
 	RecordNumber: number;
 	RecordTitle: string;
 	Section: [
-		ChemicalSafety,
+		RawChemicalSafety,
 		NamesAndIdentifiers,
 		ChemicalAndPhysicalProperties,
 		FoodAdditivesAndIngredients,
@@ -148,4 +148,93 @@ export interface PubChemCompound {
 
 export interface RawCompound {
 	Record: PubChemCompound;
+}
+
+// Parsed Compound types
+//TODO this part was prepared for compound 222. This will probably won't work for other compounds. Update data types for all possible results from Pubchem API
+interface ChemicalSafety {
+	Extra: string;
+	Type: string;
+	URL: string;
+}
+
+export interface ParsedCompound {
+	RecordNumber: number;
+	RecordTitle: string;
+	ChemicalSafety: ChemicalSafety[];
+	RecordDescription: string[];
+	IUPACName: string;
+	InChI: string;
+	InChIKey: string;
+	CanonicalSMILES: string;
+	MolecularFormula: string[];
+	CAS: string[];
+	RelatedCAS: string[];
+	EuropeanCommunityNumber: string[];
+	ICSCNumber: string;
+	RTECSNumber: string;
+	UNNumber: string[];
+	UNII: string;
+	FEMANumber: string;
+	DSSToxSubstanceID: string;
+	Wikipedia: string[];
+	NCIThesaurusCode: string;
+	MolecularWeight: string;
+	CompoundIsCanonicalized: string;
+	XLogP3: number;
+	HydrogenBondDonorCount: number;
+	HydrogenBondAcceptorCount: number;
+	RotatableBondCount: number;
+	ExactMass: {
+		String: string;
+		Unit: string;
+	};
+	MonoisotopicMass: {
+		String: string;
+		Unit: string;
+	};
+	TopologicalPolarSurfaceArea: {
+		Number: number;
+		Unit: string;
+	};
+	HeavyAtomCount: number;
+	Complexity: number;
+	IsotopeAtomCount: number;
+	DefinedAtomStereocenterCount: number;
+	UndefinedAtomStereocenterCount: number;
+	DefinedBondStereocenterCount: number;
+	UndefinedBondStereocenterCount: number;
+	'Covalently-BondedUnitCount': number;
+	PhysicalDescription: string[];
+	ColorForm: string[];
+	Odor: string[];
+	Taste: string;
+	BoilingPoint: string[];
+	MeltingPoint: string[];
+	FlashPoint: string[];
+	Solubility: string[];
+	Density: string[];
+	VaporDensity: string[];
+	VaporPressure: string[];
+	LogP: string;
+	HenrysLawConstant: string;
+	AtmosphericOHRateConstant: string;
+	'Stability/ShelfLife': string;
+	'Autoignition Temperature': string[];
+	Decomposition: string[];
+	Viscosity: string;
+	Corrosivity: string[];
+	HeatOfCombustion: string;
+	HeatOfVaporization: string;
+	pH: string;
+	SurfaceTension: string;
+	IonizationPotential: string;
+	Polymerization: string;
+	OdorThreshold: string[];
+	RefractiveIndex: string;
+	DissociationConstants: string;
+	KovatsRetentionIndex: string[];
+	OtherExperimentalProperties: string[];
+	FoodAdditiveClasses: string;
+	AgrochemicalCategory: string;
 }

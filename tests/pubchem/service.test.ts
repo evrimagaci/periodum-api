@@ -15,6 +15,7 @@ describe('PubChem API Tests', () => {
 		const service = new PubChemService();
 		const data = await service.getCompoundById(222);
 		expect(data.RecordTitle).toEqual('Ammonia');
+		expect(Array.isArray(data.ChemicalSafety)).toBe(true);
 		// FIX: Validate the data
 		// expect(data.Section[0].TOCHeading).toEqual('Chemical Safety');
 		// expect(

@@ -1,5 +1,5 @@
 import PubChemApi from './api';
-import { PubChemCompound, RawCompound } from './types';
+import { RawCompound, ParsedCompound } from './types';
 import getNecessaryData from './parseData';
 import { RateLimiter } from 'limiter';
 
@@ -12,7 +12,7 @@ class PubChemService {
 		this.limiter = new RateLimiter({ tokensPerInterval: 1, interval: 250 });
 	}
 
-	async getCompoundById(id: number): Promise<PubChemCompound> {
+	async getCompoundById(id: number): Promise<ParsedCompound> {
 		const response = await this.api.getCompoundById(id);
 		const rawData = response.data as RawCompound;
 		return getNecessaryData(rawData.Record);
@@ -35,7 +35,7 @@ class PubChemService {
 	}
 
 	getCompounds = async (from: number, to: number) => {
-		const result: PubChemCompound[] = [];
+		const result: ParsedCompound[] = [];
 		for (let id = from; id <= to; id++) {
 			await this.throttleRequest(id).then((e) => {
 				if (e) {

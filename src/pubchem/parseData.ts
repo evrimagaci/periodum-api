@@ -1,4 +1,4 @@
-import { PubChemCompound } from './types';
+import { PubChemCompound, ParsedCompound } from './types';
 import type { BaseSection, DataKeys, Markup, Value } from './types';
 type ObjectOfAny = { [key: string]: any };
 type Resolver = (
@@ -644,10 +644,8 @@ const extractFromArrayIfOneItem = (val: unknown) => {
 	return val;
 };
 
-export default function getNecessaryData(
-	raw: PubChemCompound
-): PubChemCompound {
-	let res = {} as PubChemCompound;
+export default function getNecessaryData(raw: PubChemCompound): ParsedCompound {
+	let res = {} as ParsedCompound;
 	res = { ...res, RecordTitle: raw.RecordTitle };
 	res = { ...res, RecordNumber: raw.RecordNumber };
 	dataPaths.forEach(({ name, sectionPath, dataPath, resolver }) => {
