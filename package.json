@@ -20,6 +20,9 @@
 			"pre-commit": "npm run prettier-format && npm run lint"
 		}
 	},
+	"prisma": {
+		"seed": "ts-node prisma/seed.ts"
+	},
 	"dependencies": {
 		"@appsignal/express": "^1.0.26",
 		"@appsignal/nodejs": "^2.3.2",
