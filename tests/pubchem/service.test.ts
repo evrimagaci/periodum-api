@@ -12,17 +12,14 @@ jest.mock('axios', () => {
 });
 
 const service = new PubChemService();
+const noData = 'N/A';
 
 describe('PubChem API Tests', () => {
-	// let rawData: RawCompound;
-	let parsedData: ParsedCompound;
-	beforeAll(async () => {
-		// rawData = await service.getRawCompoundById(222);
-		parsedData = await service.getParsedCompoundById(222);
-		// console.log(parsedData);
-	});
-
-	describe('should parse RawCompound properly', () => {
+	describe('should parse RawCompound with id 222 properly', () => {
+		let parsedData: ParsedCompound;
+		beforeAll(async () => {
+			parsedData = await service.getParsedCompoundById(222);
+		});
 		it('should parse Record Number properly', () => {
 			expect(parsedData.RecordNumber).toBe(222);
 		});
@@ -253,7 +250,7 @@ describe('PubChem API Tests', () => {
 		});
 
 		it('should parse Taste properly', () => {
-			expect(parsedData.Taste).toBe('N/A');
+			expect(parsedData.Taste).toEqual(noData);
 		});
 
 		it('should parse BoilingPoint properly', () => {
@@ -341,7 +338,7 @@ describe('PubChem API Tests', () => {
 		});
 
 		it('should parse AtmosphericOHRateConstant properly', () => {
-			expect(parsedData.AtmosphericOHRateConstant).toBe('N/A');
+			expect(parsedData.AtmosphericOHRateConstant).toEqual(noData);
 		});
 
 		it('should parse Stability/ShelfLife properly', () => {
@@ -404,7 +401,7 @@ describe('PubChem API Tests', () => {
 		});
 
 		it('should parse Polymerization properly', () => {
-			expect(parsedData.Polymerization).toBe('N/A');
+			expect(parsedData.Polymerization).toEqual(noData);
 		});
 
 		it('should parse OdorThreshold properly', () => {
@@ -448,6 +445,293 @@ describe('PubChem API Tests', () => {
 
 		it('should parse AgrochemicalCategory properly', () => {
 			expect(parsedData.AgrochemicalCategory).toBe('Microbiocide');
+		});
+	});
+
+	describe('should parse RawCompoiund with id 0, which is empty and was created for testing purposes', () => {
+		let parsedData: ParsedCompound;
+		beforeAll(async () => {
+			parsedData = await service.getParsedCompoundById(0);
+		});
+
+		it('should parse RecordTitle to Empty Compound', () => {
+			expect(parsedData.RecordTitle).toBe('Empty Compound');
+		});
+
+		it('should parse RecordNumber to 0', () => {
+			expect(parsedData.RecordNumber).toBe(0);
+		});
+
+		it('should parse RecordDescription to noData', () => {
+			expect(parsedData.RecordDescription).toEqual(noData);
+		});
+
+		it('should parse ChemicalSafety to noData', () => {
+			expect(parsedData.ChemicalSafety).toEqual(noData);
+		});
+
+		it('should parse IUPACName to noData', () => {
+			expect(parsedData.IUPACName).toEqual(noData);
+		});
+
+		it('should parse InChI to noData', () => {
+			expect(parsedData.InChI).toEqual(noData);
+		});
+
+		it('should parse InChIKey to noData', () => {
+			expect(parsedData.InChIKey).toEqual(noData);
+		});
+
+		it('should parse CanonicalSMILES to noData', () => {
+			expect(parsedData.CanonicalSMILES).toEqual(noData);
+		});
+
+		it('should parse MolecularFormula to noData', () => {
+			expect(parsedData.MolecularFormula).toEqual(noData);
+		});
+
+		it('should parse CAS to noData', () => {
+			expect(parsedData.CAS).toEqual(noData);
+		});
+
+		it('should parse RelatedCAS to noData', () => {
+			expect(parsedData.RelatedCAS).toEqual(noData);
+		});
+
+		it('should parse EuropeanCommunityNumber to noData', () => {
+			expect(parsedData.EuropeanCommunityNumber).toEqual(noData);
+		});
+
+		it('should parse ICSCNumber to noData', () => {
+			expect(parsedData.ICSCNumber).toEqual(noData);
+		});
+
+		it('should parse RTECSNumber to noData', () => {
+			expect(parsedData.RTECSNumber).toEqual(noData);
+		});
+
+		it('should parse UNNumber to noData', () => {
+			expect(parsedData.UNNumber).toEqual(noData);
+		});
+
+		it('should parse UNII to noData', () => {
+			expect(parsedData.UNII).toEqual(noData);
+		});
+
+		it('should parse FEMANumber to noData', () => {
+			expect(parsedData.FEMANumber).toEqual(noData);
+		});
+
+		it('should parse DSSToxSubstanceID to noData', () => {
+			expect(parsedData.DSSToxSubstanceID).toEqual(noData);
+		});
+
+		it('should parse Wikipedia to noData', () => {
+			expect(parsedData.Wikipedia).toEqual(noData);
+		});
+
+		it('should parse NCIThesaurusCode to noData', () => {
+			expect(parsedData.NCIThesaurusCode).toEqual(noData);
+		});
+
+		it('should parse MolecularWeight to noData', () => {
+			expect(parsedData.MolecularWeight).toEqual(noData);
+		});
+
+		it('should parse CompoundIsCanonicalized to noData', () => {
+			expect(parsedData.CompoundIsCanonicalized).toEqual(noData);
+		});
+
+		it('should parse XLogP3 to noData', () => {
+			expect(parsedData.XLogP3).toEqual(noData);
+		});
+
+		it('should parse HydrogenBondDonorCount to noData', () => {
+			expect(parsedData.HydrogenBondDonorCount).toEqual(noData);
+		});
+
+		it('should parse HydrogenBondAcceptorCount to noData', () => {
+			expect(parsedData.HydrogenBondAcceptorCount).toEqual(noData);
+		});
+
+		it('should parse RotatableBondCount to noData', () => {
+			expect(parsedData.RotatableBondCount).toEqual(noData);
+		});
+
+		it('should parse ExactMass to noData', () => {
+			expect(parsedData.ExactMass).toEqual(noData);
+		});
+
+		it('should parse MonoisotopicMass to noData', () => {
+			expect(parsedData.MonoisotopicMass).toEqual(noData);
+		});
+
+		it('should parse TopologicalPolarSurfaceArea to noData', () => {
+			expect(parsedData.TopologicalPolarSurfaceArea).toEqual(noData);
+		});
+
+		it('should parse HeavyAtomCount to noData', () => {
+			expect(parsedData.HeavyAtomCount).toEqual(noData);
+		});
+
+		it('should parse FormalCharge to noData', () => {
+			expect(parsedData.FormalCharge).toEqual(noData);
+		});
+
+		it('should parse Complexity to noData', () => {
+			expect(parsedData.Complexity).toEqual(noData);
+		});
+
+		it('should parse IsotopeAtomCount to noData', () => {
+			expect(parsedData.IsotopeAtomCount).toEqual(noData);
+		});
+
+		it('should parse DefinedAtomStereocenterCount to noData', () => {
+			expect(parsedData.DefinedAtomStereocenterCount).toEqual(noData);
+		});
+
+		it('should parse UndefinedAtomStereocenterCount to noData', () => {
+			expect(parsedData.UndefinedAtomStereocenterCount).toEqual(noData);
+		});
+
+		it('should parse DefinedBondStereocenterCount to noData', () => {
+			expect(parsedData.DefinedBondStereocenterCount).toEqual(noData);
+		});
+
+		it('should parse UndefinedBondStereocenterCount to noData', () => {
+			expect(parsedData.UndefinedBondStereocenterCount).toEqual(noData);
+		});
+
+		it('should parse Covalently-BondedUnitCount to noData', () => {
+			expect(parsedData['Covalently-BondedUnitCount']).toEqual(noData);
+		});
+
+		it('should parse PhysicalDescription to noData', () => {
+			expect(parsedData.PhysicalDescription).toEqual(noData);
+		});
+
+		it('should parse ColorForm to noData', () => {
+			expect(parsedData.ColorForm).toEqual(noData);
+		});
+
+		it('should parse Odor to noData', () => {
+			expect(parsedData.Odor).toEqual(noData);
+		});
+
+		it('should parse Taste to noData', () => {
+			expect(parsedData.Taste).toEqual(noData);
+		});
+
+		it('should parse BoilingPoint to noData', () => {
+			expect(parsedData.BoilingPoint).toEqual(noData);
+		});
+
+		it('should parse MeltingPoint to noData', () => {
+			expect(parsedData.MeltingPoint).toEqual(noData);
+		});
+
+		it('should parse FlashPoint to noData', () => {
+			expect(parsedData.FlashPoint).toEqual(noData);
+		});
+
+		it('should parse Solubility to noData', () => {
+			expect(parsedData.Solubility).toEqual(noData);
+		});
+
+		it('should parse Density to noData', () => {
+			expect(parsedData.Density).toEqual(noData);
+		});
+
+		it('should parse VaporDensity to noData', () => {
+			expect(parsedData.VaporDensity).toEqual(noData);
+		});
+
+		it('should parse VaporPressure to noData', () => {
+			expect(parsedData.VaporPressure).toEqual(noData);
+		});
+
+		it('should parse LogP to noData', () => {
+			expect(parsedData.LogP).toEqual(noData);
+		});
+
+		it('should parse HenrysLawConstant to noData', () => {
+			expect(parsedData.HenrysLawConstant).toEqual(noData);
+		});
+
+		it('should parse AtmosphericOHRateConstant to noData', () => {
+			expect(parsedData.AtmosphericOHRateConstant).toEqual(noData);
+		});
+
+		it('should parse Stability/ShelfLife to noData', () => {
+			expect(parsedData['Stability/ShelfLife']).toEqual(noData);
+		});
+
+		it('should parse AutoignitionTemperature to noData', () => {
+			expect(parsedData.AutoignitionTemperature).toEqual(noData);
+		});
+
+		it('should parse Decomposition to noData', () => {
+			expect(parsedData.Decomposition).toEqual(noData);
+		});
+
+		it('should parse Viscosity to noData', () => {
+			expect(parsedData.Viscosity).toEqual(noData);
+		});
+
+		it('should parse Corrosivity to noData', () => {
+			expect(parsedData.Corrosivity).toEqual(noData);
+		});
+
+		it('should parse HeatofCombustion to noData', () => {
+			expect(parsedData.HeatofCombustion).toEqual(noData);
+		});
+
+		it('should parse HeatofVaporization to noData', () => {
+			expect(parsedData.HeatofVaporization).toEqual(noData);
+		});
+
+		it('should parse pH to noData', () => {
+			expect(parsedData.pH).toEqual(noData);
+		});
+
+		it('should parse SurfaceTension to noData', () => {
+			expect(parsedData.SurfaceTension).toEqual(noData);
+		});
+
+		it('should parse IonizationPotential to noData', () => {
+			expect(parsedData.IonizationPotential).toEqual(noData);
+		});
+
+		it('should parse Polymerization to noData', () => {
+			expect(parsedData.Polymerization).toEqual(noData);
+		});
+
+		it('should parse OdorThreshold to noData', () => {
+			expect(parsedData.OdorThreshold).toEqual(noData);
+		});
+
+		it('should parse RefractiveIndex to noData', () => {
+			expect(parsedData.RefractiveIndex).toEqual(noData);
+		});
+
+		it('should parse DissociationConstants to noData', () => {
+			expect(parsedData.DissociationConstants).toEqual(noData);
+		});
+
+		it('should parse KovatsRetentionIndex to noData', () => {
+			expect(parsedData.KovatsRetentionIndex).toEqual(noData);
+		});
+
+		it('should parse OtherExperimentalProperties to noData', () => {
+			expect(parsedData.OtherExperimentalProperties).toEqual(noData);
+		});
+
+		it('should parse FoodAdditiveClasses to noData', () => {
+			expect(parsedData.FoodAdditiveClasses).toEqual(noData);
+		});
+
+		it('should parse AgrochemicalCategory to noData', () => {
+			expect(parsedData.AgrochemicalCategory).toEqual(noData);
 		});
 	});
 });
