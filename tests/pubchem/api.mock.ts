@@ -2,9 +2,11 @@ import { AxiosResponse } from 'axios';
 import { readFileSync } from 'fs';
 import path from 'path';
 
-export const getCompoundById = (): AxiosResponse => {
-	//FIX: If parameter (id: number) set it combines with URL and path.
-	return getCompound(222);
+export const getCompoundById = (url: string): AxiosResponse => {
+	const splitted = url.split('/');
+	const id = parseInt(splitted[splitted.length - 2]);
+
+	return getCompound(id);
 };
 
 function getCompound(id: number) {

@@ -198,6 +198,7 @@ export interface ParsedCompound {
 		Unit: string;
 	};
 	HeavyAtomCount: number;
+	FormalCharge: number;
 	Complexity: number;
 	IsotopeAtomCount: number;
 	DefinedAtomStereocenterCount: number;
@@ -220,12 +221,12 @@ export interface ParsedCompound {
 	HenrysLawConstant: string;
 	AtmosphericOHRateConstant: string;
 	'Stability/ShelfLife': string;
-	'Autoignition Temperature': string[];
+	AutoignitionTemperature: string[];
 	Decomposition: string[];
 	Viscosity: string;
 	Corrosivity: string[];
-	HeatOfCombustion: string;
-	HeatOfVaporization: string;
+	HeatofCombustion: string;
+	HeatofVaporization: string;
 	pH: string;
 	SurfaceTension: string;
 	IonizationPotential: string;

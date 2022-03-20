@@ -12,10 +12,18 @@ class PubChemService {
 		this.limiter = new RateLimiter({ tokensPerInterval: 1, interval: 250 });
 	}
 
-	async getCompoundById(id: number): Promise<ParsedCompound> {
+	parseData(data: RawCompound): ParsedCompound {
+		return getNecessaryData(data.Record);
+	}
+
+	async getRawCompoundById(id: number): Promise<RawCompound> {
 		const response = await this.api.getCompoundById(id);
-		const rawData = response.data as RawCompound;
-		return getNecessaryData(rawData.Record);
+		return response.data as RawCompound;
+	}
+
+	async getParsedCompoundById(id: number): Promise<ParsedCompound> {
+		const rawData = await this.getRawCompoundById(id);
+		return this.parseData(rawData);
 	}
 
 	async throttleRequest(id: number) {
@@ -24,7 +32,7 @@ class PubChemService {
 		if (id === undefined) {
 			return;
 		}
-		return this.getCompoundById(id)
+		return this.getParsedCompoundById(id)
 			.then((res) => {
 				return res;
 			})
