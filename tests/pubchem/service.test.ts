@@ -1,6 +1,6 @@
 import * as mockedAPI from './api.mock';
 import PubChemService from '../../src/pubchem/service';
-import { ParsedCompound /*RawCompound*/ } from '../../src/pubchem/types';
+import { ParsedCompound } from '../../src/pubchem/types';
 
 jest.mock('axios', () => {
 	return {

@@ -649,7 +649,6 @@ export default function getNecessaryData(raw: PubChemCompound): ParsedCompound {
 	res = { ...res, RecordTitle: raw.RecordTitle };
 	res = { ...res, RecordNumber: raw.RecordNumber };
 	dataPaths.forEach(({ name, sectionPath, dataPath, resolver }) => {
-		// if (name === "MeltingPoint") {
 		const section = [...sectionPath].reduce((acc, cur, i, arr) => {
 			if (Object.keys(acc).length === 0) {
 				const foundSection = findSection(raw)(cur);
@@ -670,8 +669,6 @@ export default function getNecessaryData(raw: PubChemCompound): ParsedCompound {
 			}
 		}
 		res = { ...res, [name]: data };
-		// console.log(data, name);
-		// }
 	});
 	return res;
 }
