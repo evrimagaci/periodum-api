@@ -7,26 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Compounds {
-  id                                     Int     @id @default(autoincrement()) @db.UnsignedInt
-  number_of_atom_stereocenters           Int     @db.UnsignedTinyInt
-  number_of_bond_stereocenters           Int     @db.UnsignedTinyInt
-  cas_number                             String? @default("") @db.Char(11)
-  structure_evaluation                   String? @db.Text
-  formula                                String? @db.VarChar(100)
-  molecular_weight                       Float?
-  dtp_names                              String? @db.Text
-  NCICADD_FICUS_ID                       String? @db.Text
-  NCICADD_FICTS_ID                       String? @db.Text
-  NCICADD_UUUUU_ID                       String? @db.Text
-  standard_in_chi                        String? @db.Text
-  standard_in_chi_key                    String? @db.Text
-  smiles                                 String? @db.Text
-  full_atom_and_bond_stereospecification String? @db.Text
-
-  @@index([formula], map: "compounds_formula_index")
-}
-
 model Elements {
   number                                  Int     @id
   name_tr                                 String? @db.Text
