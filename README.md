@@ -21,7 +21,9 @@ npm install && \
 npx prisma generate && \
 npm run dev
 ```
+
 ### Run inside Docker
+
 ```bash
 # Run the db in background
 docker-compose --env-file ./dev.env up -d db
@@ -39,43 +41,45 @@ docker-compose --env-file ./dev.env up -d app --build
 
 - You can connect to the [running container via VSCode](https://code.visualstudio.com/docs/remote/containers) without installing NodeJS or any other dependencies on your machine. Just attach to the Periodum API container after running the container.
 
-### Importing the data
-Please apply steps below one by one on the root folder of the project.
+### Running migrations
+
+Please always follow the latest [Prisma](https://prisma.io) [documentation](https://www.prisma.io/docs/) for migrations.
 
 ```bash
-# Keep the db container running (background)
-docker-compose --env-file ./dev.env up -d db
+# It will reset the db,
+# apply all migrations
+# and run the seed
+# Currently it will import only Elements and Isotopes
+npx migrate reset
 
-# Create the `db` folder if not exists
-mkdir db
-
-# Download the DB file
-wget https://evrimagaci.org/public/periodum/db.sql.zip -P db/
-
-# Unzip the archived file
-unzip db/db.sql.zip -d db/
-
-# Load the environment variable into the memory
-# so that we can use it for the import
-source dev.env
-
-# Ensure that db running and accepting the connection
-docker-compose logs db
-
-# Finally, we shall import the data into the database
-# This operation might take some time
-docker-compose exec -T db mysql -u root -p"$DB_ROOT_PASSWORD" "$DB_NAME" < db/db.sql
-
-# Now, you may run the app with confidence
-docker-compose --env-file ./dev.env up app
-
-# Clean up
-rm db/db*
+# For help you man checkout the manual
+npx prisma migrate --help
 ```
+
+## Prisma Migration Commands
+
+```bash
+# Create a migration from changes in Prisma schema,
+# apply it to the database,
+# trigger generators (e.g. Prisma Client)
+prisma migrate dev
+
+# Reset your database and apply all migrations
+prisma migrate reset
+
+# Apply pending migrations to the database in production/staging
+prisma migrate deploy
+
+# Check the status of migrations in the production/staging database
+prisma migrate status
+```
+
 ## Contribution Guidelines
-Please follow the same [guidelines](https://github.com/evrimagaci/periodum/blob/main/CONTRIBUTING.md)  with [the main project](https://github.com/evrimagaci/periodum/).
+
+Please follow the same [guidelines](https://github.com/evrimagaci/periodum/blob/main/CONTRIBUTING.md) with [the main project](https://github.com/evrimagaci/periodum/).
 
 ### TL;DR
+
 - Fork the repository
 - Create a `feature` or `bugfix` branch from the `develop` branch (ex: `feature/awesome-feature`) on your fork.
 - Work on your new branch
