@@ -9,7 +9,7 @@ class PubChemService {
 
 	public constructor() {
 		this.api = new PubChemApi();
-		this.limiter = new RateLimiter({ tokensPerInterval: 1, interval: 250 });
+		this.limiter = new RateLimiter({ tokensPerInterval: 5, interval: 1000 });
 	}
 
 	parseData(data: RawCompound): ParsedCompound {
@@ -27,8 +27,6 @@ class PubChemService {
 	}
 
 	async throttleRequest(id: number) {
-		await this.limiter.removeTokens(1);
-
 		if (id === undefined) {
 			return;
 		}
@@ -43,17 +41,14 @@ class PubChemService {
 	}
 
 	getCompounds = async (from: number, to: number) => {
-		const result: ParsedCompound[] = [];
+		const result: Promise<void | ParsedCompound>[] = [];
 		for (let id = from; id <= to; id++) {
-			await this.throttleRequest(id).then((e) => {
-				if (e) {
-					//eslint-disable-next-line
-					console.log('title', e?.RecordTitle);
-					result.push(e);
-				}
-			});
+			await this.limiter.removeTokens(1);
+
+			result.push(this.throttleRequest(id));
 		}
-		return result;
+
+		return Promise.all(result);
 	};
 }
 

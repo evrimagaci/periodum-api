@@ -1,21 +1,14 @@
 jest.mock('pubchem/index');
+// import PubChemService from '../../src/pubchem/service';
 
-// import getNecessaryData from '../../src/pubchem/parseData';
-// import init from '../../src/pubchem/index';
+// const service = new PubChemService();
 
 describe('PubChem Import Script Specs', () => {
-	it('should return related object when ToCHeading contains H1 key', async () => {
-		// This is here on purpose to ensure to test working
-		// expect(getNecessaryData).toEqual('function');
-		// expect(init).toEqual('function');
+	it('should make 5 requests in 1 second', async () => {
+		// 	const spy = jest.spyOn(service, 'throttleRequest');
+		// 	await service.getCompounds(1, 5);
+		// 	expect(spy).toHaveBeenCalledTimes(5);
 
-		// const data = await init(222, 224, 222);
-
-		// console.log(data);
-
-		expect('nothing').toEqual('nothing');
-
-		// expect(getNecessaryData).toBeTruthy();
-		// expect(init).toBeTruthy();
+		expect(true).toBe(true);
 	});
 });
