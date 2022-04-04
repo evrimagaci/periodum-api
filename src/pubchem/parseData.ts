@@ -12,7 +12,7 @@ const convertToNumber = (val: unknown): number => {
 	return Number(val);
 };
 
-const NoData = 'N/A';
+const NoData = undefined;
 const dataPaths: {
 	name: string;
 	sectionPath: string[];

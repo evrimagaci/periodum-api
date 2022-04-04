@@ -12,7 +12,7 @@ jest.mock('axios', () => {
 });
 
 const service = new PubChemService();
-const noData = 'N/A';
+const noData = undefined;
 
 describe('PubChem API Tests', () => {
 	describe('should parse RawCompound with id 222 properly', () => {
