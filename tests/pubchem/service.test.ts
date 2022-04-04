@@ -119,7 +119,7 @@ describe('PubChem API Tests', () => {
 		});
 
 		it('should parse FEMANumber properly', () => {
-			expect(parsedData.FEMANumber).toBe('4494');
+			expect(parsedData.FEMANumber).toBe(4494);
 		});
 
 		it('should parse DSSToxSubstanceID properly', () => {
@@ -139,7 +139,7 @@ describe('PubChem API Tests', () => {
 		});
 
 		it('should parse MolecularWeight properly', () => {
-			expect(parsedData.MolecularWeight).toBe('17.031');
+			expect(parsedData.MolecularWeight).toBe(17.031);
 		});
 
 		it('should parse CompoundIsCanonicalized properly', () => {
@@ -215,8 +215,8 @@ describe('PubChem API Tests', () => {
 			expect(parsedData.UndefinedBondStereocenterCount).toBe(0);
 		});
 
-		it('should parse Covalently-BondedUnitCount properly', () => {
-			expect(parsedData['Covalently-BondedUnitCount']).toBe(1);
+		it('should parse CovalentlyBondedUnitCount properly', () => {
+			expect(parsedData['CovalentlyBondedUnitCount']).toBe(1);
 		});
 
 		it('should parse PhysicalDescription properly', () => {
@@ -341,8 +341,8 @@ describe('PubChem API Tests', () => {
 			expect(parsedData.AtmosphericOHRateConstant).toEqual(noData);
 		});
 
-		it('should parse Stability/ShelfLife properly', () => {
-			expect(parsedData['Stability/ShelfLife']).toBe(
+		it('should parse StabilityShelfLife properly', () => {
+			expect(parsedData['StabilityShelfLife']).toBe(
 				'Stable under recommended storage conditions.'
 			);
 		});
@@ -602,8 +602,8 @@ describe('PubChem API Tests', () => {
 			expect(parsedData.UndefinedBondStereocenterCount).toEqual(noData);
 		});
 
-		it('should parse Covalently-BondedUnitCount to noData', () => {
-			expect(parsedData['Covalently-BondedUnitCount']).toEqual(noData);
+		it('should parse CovalentlyBondedUnitCount to noData', () => {
+			expect(parsedData['CovalentlyBondedUnitCount']).toEqual(noData);
 		});
 
 		it('should parse PhysicalDescription to noData', () => {
@@ -662,8 +662,8 @@ describe('PubChem API Tests', () => {
 			expect(parsedData.AtmosphericOHRateConstant).toEqual(noData);
 		});
 
-		it('should parse Stability/ShelfLife to noData', () => {
-			expect(parsedData['Stability/ShelfLife']).toEqual(noData);
+		it('should parse StabilityShelfLife to noData', () => {
+			expect(parsedData['StabilityShelfLife']).toEqual(noData);
 		});
 
 		it('should parse AutoignitionTemperature to noData', () => {

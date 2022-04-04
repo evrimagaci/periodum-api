@@ -23,15 +23,18 @@ class PubChemService {
 
 	async getParsedCompoundById(id: number): Promise<ParsedCompound> {
 		const rawData = await this.getRawCompoundById(id);
-		return this.parseData(rawData);
+		return { ...this.parseData(rawData), id };
 	}
 
 	async throttleRequest(id: number) {
 		if (id === undefined) {
 			return;
 		}
+
 		return this.getParsedCompoundById(id)
 			.then((res) => {
+				//eslint-disable-next-line
+				// console.log(res.RecordTitle);
 				return res;
 			})
 			.catch((e) => {

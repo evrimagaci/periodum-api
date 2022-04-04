@@ -1,9 +1,16 @@
 import { PubChemCompound, ParsedCompound } from './types';
 import type { BaseSection, DataKeys, Markup, Value } from './types';
 type ObjectOfAny = { [key: string]: any };
-type Resolver = (
-	data: Record<string, unknown>
-) => Record<string, unknown> | Record<string, unknown>[];
+interface Resolver {
+	(data: Value & Markup & string):
+		| Record<string, unknown>
+		| Record<string, unknown>[]
+		| number;
+}
+
+const convertToNumber = (val: unknown): number => {
+	return Number(val);
+};
 
 const NoData = 'N/A';
 const dataPaths: {
@@ -101,7 +108,8 @@ const dataPaths: {
 	{
 		name: 'FEMANumber',
 		sectionPath: ['Names and Identifiers', 'Other Identifiers', 'FEMA Number'],
-		dataPath: ['Information', 'Value', 'StringWithMarkup', 'String']
+		dataPath: ['Information', 'Value', 'StringWithMarkup', 'String'],
+		resolver: convertToNumber
 	},
 	{
 		name: 'DSSToxSubstanceID',
@@ -134,7 +142,10 @@ const dataPaths: {
 			'Computed Properties',
 			'Molecular Weight'
 		],
-		dataPath: ['Information', 'Value', 'StringWithMarkup', 'String']
+		dataPath: ['Information', 'Value', 'StringWithMarkup', 'String'],
+		resolver: (data: string) => {
+			return Number(data);
+		}
 	},
 	{
 		name: 'CompoundIsCanonicalized',
@@ -305,7 +316,7 @@ const dataPaths: {
 		dataPath: ['Information', 'Value', 'Number']
 	},
 	{
-		name: 'Covalently-BondedUnitCount',
+		name: 'CovalentlyBondedUnitCount',
 		sectionPath: [
 			'Chemical and Physical Properties',
 			'Computed Properties',
@@ -441,7 +452,7 @@ const dataPaths: {
 		dataPath: ['Information', 'Value', 'StringWithMarkup', 'String']
 	},
 	{
-		name: 'Stability/ShelfLife',
+		name: 'StabilityShelfLife',
 		sectionPath: [
 			'Chemical and Physical Properties',
 			'Experimental Properties',

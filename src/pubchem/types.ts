@@ -159,6 +159,7 @@ interface ChemicalSafety {
 }
 
 export interface ParsedCompound {
+	id: number;
 	RecordNumber: number;
 	RecordTitle: string;
 	ChemicalSafety: ChemicalSafety[];
@@ -175,11 +176,11 @@ export interface ParsedCompound {
 	RTECSNumber: string;
 	UNNumber: string[];
 	UNII: string;
-	FEMANumber: string;
+	FEMANumber: number;
 	DSSToxSubstanceID: string;
 	Wikipedia: string[];
 	NCIThesaurusCode: string;
-	MolecularWeight: string;
+	MolecularWeight: number;
 	CompoundIsCanonicalized: string;
 	XLogP3: number;
 	HydrogenBondDonorCount: number;
@@ -205,7 +206,7 @@ export interface ParsedCompound {
 	UndefinedAtomStereocenterCount: number;
 	DefinedBondStereocenterCount: number;
 	UndefinedBondStereocenterCount: number;
-	'Covalently-BondedUnitCount': number;
+	CovalentlyBondedUnitCount: number;
 	PhysicalDescription: string[];
 	ColorForm: string[];
 	Odor: string[];
@@ -220,7 +221,7 @@ export interface ParsedCompound {
 	LogP: string;
 	HenrysLawConstant: string;
 	AtmosphericOHRateConstant: string;
-	'Stability/ShelfLife': string;
+	StabilityShelfLife: string;
 	AutoignitionTemperature: string[];
 	Decomposition: string[];
 	Viscosity: string;
