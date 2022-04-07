@@ -1,5 +1,5 @@
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -240,4 +240,78 @@ model Isotopes {
   spin                    Float?
   g_factor                Float?
   quadrupole_moment       Float?
+}
+
+model Compounds {
+  id                             Int      @id @default(0)
+  RecordNumber                   Int      @map("record_number")
+  RecordTitle                    String   @map("record_title") @db.Text
+  ChemicalSafety                 Json[]   @map("chemical_safety")
+  RecordDescription              String[] @map("record_description") @db.Text
+  IUPACName                      String?  @map("iupac_name") @db.Text
+  InChI                          String?  @map("inchi") @db.Text
+  InChIKey                       String?  @map("inchi_key") @db.Text
+  CanonicalSMILES                String?  @map("canonical_smiles") @db.Text
+  MolecularFormula               String[] @map("molecular_formula") @db.Text
+  CAS                            String[] @map("cas") @db.Text
+  RelatedCAS                     String[] @map("related_cas") @db.Text
+  EuropeanCommunityNumber        String[] @map("european_community_number") @db.Text
+  ICSCNumber                     String?  @map("icsc_number") @db.Text
+  RTECSNumber                    String?  @map("rtecs_number") @db.Text
+  UNNumber                       String[] @map("un_number") @db.Text
+  UNII                           String?  @map("unii") @db.Text
+  FEMANumber                     Int?     @map("fema_number")
+  DSSToxSubstanceID              String?  @map("dss_tox_substance_id") @db.Text
+  Wikipedia                      String[] @map("wikipedia") @db.Text
+  NCIThesaurusCode               String?  @map("nci_thesaurus_code") @db.Text
+  MolecularWeight                Float?   @map("molecular_weight")
+  CompoundIsCanonicalized        String?  @map("compound_is_canonicalized") @db.Text
+  XLogP3                         Float?   @map("xlogp3")
+  HydrogenBondDonorCount         Int?     @map("hydrogen_bond_donor_count")
+  HydrogenBondAcceptorCount      Int?     @map("hydrogen_bond_acceptor_count")
+  RotatableBondCount             Int?     @map("rotatable_bond_count")
+  ExactMass                      Json?    @map("exact_mass")
+  MonoisotopicMass               Json?    @map("monoisotopic_mass")
+  TopologicalPolarSurfaceArea    Json?    @map("topological_polar_surface_area")
+  HeavyAtomCount                 Int?     @map("heavy_atom_count")
+  FormalCharge                   Int?     @map("formal_charge")
+  Complexity                     Int?     @map("complexity")
+  IsotopeAtomCount               Int?     @map("isotope_atom_count")
+  DefinedAtomStereocenterCount   Int?     @map("defined_atom_stereocenter_count")
+  UndefinedAtomStereocenterCount Int?     @map("undefined_atom_stereocenter_count")
+  DefinedBondStereocenterCount   Int?     @map("defined_bond_stereocenter_count")
+  UndefinedBondStereocenterCount Int?     @map("undefined_bond_stereocenter_count")
+  CovalentlyBondedUnitCount      Int?     @map("covalently-bonded_unit_count")
+  PhysicalDescription            String[] @map("physical_description") @db.Text
+  ColorForm                      String[] @map("color_form") @db.Text
+  Odor                           String[] @map("odor") @db.Text
+  Taste                          String?  @map("taste") @db.Text
+  BoilingPoint                   String[] @map("boiling_point") @db.Text
+  MeltingPoint                   String[] @map("melting_point") @db.Text
+  FlashPoint                     String[] @map("flash_point") @db.Text
+  Solubility                     String[] @map("solubility") @db.Text
+  Density                        String[] @map("density") @db.Text
+  VaporDensity                   String[] @map("vapor_density") @db.Text
+  VaporPressure                  String[] @map("vapor_pressure") @db.Text
+  LogP                           String?  @map("logp") @db.Text
+  HenrysLawConstant              String?  @map("henrys_law_constant") @db.Text
+  AtmosphericOHRateConstant      String?  @map("atmospheric_oh_rate_constant") @db.Text
+  StabilityShelfLife             String?  @map("stability_shelf_life") @db.Text
+  AutoignitionTemperature        String[] @map("autoignition_temperature") @db.Text
+  Decomposition                  String[] @map("decomposition") @db.Text
+  Viscosity                      String?  @map("viscosity") @db.Text
+  Corrosivity                    String[] @map("corrosivity") @db.Text
+  HeatofCombustion               String?  @map("heat_of_combustion") @db.Text
+  HeatofVaporization             String?  @map("heat_of_vaporization") @db.Text
+  pH                             String?  @map("ph") @db.Text
+  SurfaceTension                 String?  @map("surface_tension") @db.Text
+  IonizationPotential            String?  @map("ionization_potential") @db.Text
+  Polymerization                 String?  @map("polymerization") @db.Text
+  OdorThreshold                  String[] @map("odor_threshold") @db.Text
+  RefractiveIndex                String?  @map("refractive_index") @db.Text
+  DissociationConstants          String[] @map("dissociation_constants") @db.Text
+  KovatsRetentionIndex           String[] @map("kovats_retention_index") @db.Text
+  OtherExperimentalProperties    String[] @map("other_experimental_properties") @db.Text
+  FoodAdditiveClasses            String?  @map("food_additive_classes") @db.Text
+  AgrochemicalCategory           String?  @map("agrochemical_category") @db.Text
 }
