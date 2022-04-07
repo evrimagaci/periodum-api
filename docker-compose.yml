@@ -21,15 +21,13 @@ services:
     restart: unless-stopped
   db:
     image: "${DB_PROVIDER}:${DB_VERSION}"
-    platform: linux/x86_64 # This is a workaround for Apple's Silicon CPUs. M1 etc.
     container_name: periodum_db
     volumes:
-        - ./db/mysql:/var/lib/mysql
+        - ./db/postgresql/data:/var/lib/postgresql/data
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${DB_NAME}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-    # ports: #enable ports if you work locally
-      # - "127.0.0.1:${DB_PORT}:3306" # Container port depends on DB PROVIDER. Can be read .env
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports: #enable ports if you work locally
+      - "127.0.0.1:${DB_PORT}:5432" # Container port depends on DB PROVIDER. Can be read .env
     restart: unless-stopped
