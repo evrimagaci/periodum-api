@@ -50,7 +50,6 @@ class PubChemService {
 
 			result.push(this.throttleRequest(id));
 		}
-
 		return Promise.all(result);
 	};
 }

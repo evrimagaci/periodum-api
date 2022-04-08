@@ -151,18 +151,16 @@ export interface RawCompound {
 }
 
 // Parsed Compound types
-//TODO this part was prepared for compound 222. This will probably won't work for other compounds. Update data types for all possible results from Pubchem API
-interface ChemicalSafety {
-	Extra: string;
-	Type: string;
-	URL: string;
-}
 
 export interface ParsedCompound {
 	id: number;
 	RecordNumber: number;
 	RecordTitle: string;
-	ChemicalSafety: ChemicalSafety[];
+	ChemicalSafety: {
+		Extra: string;
+		Type: string;
+		URL: string;
+	}[];
 	RecordDescription: string[];
 	IUPACName: string;
 	InChI: string;
@@ -173,7 +171,7 @@ export interface ParsedCompound {
 	RelatedCAS: string[];
 	EuropeanCommunityNumber: string[];
 	ICSCNumber: string;
-	RTECSNumber: string;
+	RTECSNumber: string[];
 	UNNumber: string[];
 	UNII: string;
 	FEMANumber: number;
@@ -210,7 +208,7 @@ export interface ParsedCompound {
 	PhysicalDescription: string[];
 	ColorForm: string[];
 	Odor: string[];
-	Taste: string;
+	Taste: string[];
 	BoilingPoint: string[];
 	MeltingPoint: string[];
 	FlashPoint: string[];
@@ -218,25 +216,25 @@ export interface ParsedCompound {
 	Density: string[];
 	VaporDensity: string[];
 	VaporPressure: string[];
-	LogP: string;
-	HenrysLawConstant: string;
+	LogP: string[];
+	HenrysLawConstant: string[];
 	AtmosphericOHRateConstant: string;
-	StabilityShelfLife: string;
+	StabilityShelfLife: string[];
 	AutoignitionTemperature: string[];
 	Decomposition: string[];
 	Viscosity: string;
 	Corrosivity: string[];
 	HeatofCombustion: string;
 	HeatofVaporization: string;
-	pH: string;
+	pH: string[];
 	SurfaceTension: string;
 	IonizationPotential: string;
 	Polymerization: string;
 	OdorThreshold: string[];
-	RefractiveIndex: string;
+	RefractiveIndex: string[];
 	DissociationConstants: string;
-	KovatsRetentionIndex: string[];
+	KovatsRetentionIndex: number[];
 	OtherExperimentalProperties: string[];
-	FoodAdditiveClasses: string;
-	AgrochemicalCategory: string;
+	FoodAdditiveClasses: string[];
+	AgrochemicalCategory: string[];
 }

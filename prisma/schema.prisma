@@ -257,7 +257,7 @@ model Compounds {
   RelatedCAS                     String[] @map("related_cas") @db.Text
   EuropeanCommunityNumber        String[] @map("european_community_number") @db.Text
   ICSCNumber                     String?  @map("icsc_number") @db.Text
-  RTECSNumber                    String?  @map("rtecs_number") @db.Text
+  RTECSNumber                    String[] @map("rtecs_number") @db.Text
   UNNumber                       String[] @map("un_number") @db.Text
   UNII                           String?  @map("unii") @db.Text
   FEMANumber                     Int?     @map("fema_number")
@@ -275,7 +275,7 @@ model Compounds {
   TopologicalPolarSurfaceArea    Json?    @map("topological_polar_surface_area")
   HeavyAtomCount                 Int?     @map("heavy_atom_count")
   FormalCharge                   Int?     @map("formal_charge")
-  Complexity                     Int?     @map("complexity")
+  Complexity                     Float?   @map("complexity")
   IsotopeAtomCount               Int?     @map("isotope_atom_count")
   DefinedAtomStereocenterCount   Int?     @map("defined_atom_stereocenter_count")
   UndefinedAtomStereocenterCount Int?     @map("undefined_atom_stereocenter_count")
@@ -285,7 +285,7 @@ model Compounds {
   PhysicalDescription            String[] @map("physical_description") @db.Text
   ColorForm                      String[] @map("color_form") @db.Text
   Odor                           String[] @map("odor") @db.Text
-  Taste                          String?  @map("taste") @db.Text
+  Taste                          String[] @map("taste") @db.Text
   BoilingPoint                   String[] @map("boiling_point") @db.Text
   MeltingPoint                   String[] @map("melting_point") @db.Text
   FlashPoint                     String[] @map("flash_point") @db.Text
@@ -293,25 +293,25 @@ model Compounds {
   Density                        String[] @map("density") @db.Text
   VaporDensity                   String[] @map("vapor_density") @db.Text
   VaporPressure                  String[] @map("vapor_pressure") @db.Text
-  LogP                           String?  @map("logp") @db.Text
-  HenrysLawConstant              String?  @map("henrys_law_constant") @db.Text
+  LogP                           String[] @map("logp") @db.Text
+  HenrysLawConstant              String[] @map("henrys_law_constant") @db.Text
   AtmosphericOHRateConstant      String?  @map("atmospheric_oh_rate_constant") @db.Text
-  StabilityShelfLife             String?  @map("stability_shelf_life") @db.Text
+  StabilityShelfLife             String[] @map("stability_shelf_life") @db.Text
   AutoignitionTemperature        String[] @map("autoignition_temperature") @db.Text
   Decomposition                  String[] @map("decomposition") @db.Text
   Viscosity                      String?  @map("viscosity") @db.Text
   Corrosivity                    String[] @map("corrosivity") @db.Text
   HeatofCombustion               String?  @map("heat_of_combustion") @db.Text
   HeatofVaporization             String?  @map("heat_of_vaporization") @db.Text
-  pH                             String?  @map("ph") @db.Text
+  pH                             String[] @map("ph") @db.Text
   SurfaceTension                 String?  @map("surface_tension") @db.Text
   IonizationPotential            String?  @map("ionization_potential") @db.Text
   Polymerization                 String?  @map("polymerization") @db.Text
   OdorThreshold                  String[] @map("odor_threshold") @db.Text
-  RefractiveIndex                String?  @map("refractive_index") @db.Text
+  RefractiveIndex                String[] @map("refractive_index") @db.Text
   DissociationConstants          String[] @map("dissociation_constants") @db.Text
-  KovatsRetentionIndex           String[] @map("kovats_retention_index") @db.Text
+  KovatsRetentionIndex           Float[]  @map("kovats_retention_index")
   OtherExperimentalProperties    String[] @map("other_experimental_properties") @db.Text
-  FoodAdditiveClasses            String?  @map("food_additive_classes") @db.Text
-  AgrochemicalCategory           String?  @map("agrochemical_category") @db.Text
+  FoodAdditiveClasses            String[] @map("food_additive_classes") @db.Text
+  AgrochemicalCategory           String[] @map("agrochemical_category") @db.Text
 }
