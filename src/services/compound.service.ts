@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { ParsedCompound } from '../pubchem/types';
 
 class CompoundService {
 	prisma: PrismaClient;
@@ -25,6 +26,13 @@ class CompoundService {
 			where: {
 				id: Number(id)
 			}
+		});
+	};
+
+	createMany = async (compounds: ParsedCompound[]) => {
+		return this.prisma.compounds.createMany({
+			data: compounds,
+			skipDuplicates: true
 		});
 	};
 }
