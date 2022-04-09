@@ -1,7 +1,7 @@
 import PubChemService from './service';
 // import CompoundService from '../services/compound.service';
 
-import { parseIntMap } from './utils';
+import { parseIntMap, validateRange } from './utils';
 import { RawCompound } from './types';
 
 const [from, to] = process.argv.slice(2).map(parseIntMap);
@@ -13,11 +13,7 @@ let end = 0;
 let timer: NodeJS.Timer;
 
 export default async function init(from: number, to: number) {
-	if (from <= 0 || from > to) {
-		throw new Error(
-			'Invalid range. Start must be greater than 0 and less than `to`'
-		);
-	}
+	validateRange(from, to);
 
 	start = from;
 	end = to;
