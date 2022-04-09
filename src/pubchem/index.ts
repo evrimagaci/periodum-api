@@ -1,8 +1,8 @@
 import PubChemService from './service';
-// import CompoundService from '../services/compound.service';
+import CompoundService from '../services/compound.service';
 
 import { parseIntMap, validateRange } from './utils';
-import { RawCompound } from './types';
+import { ParsedCompound } from './types';
 
 const [from, to] = process.argv.slice(2).map(parseIntMap);
 
@@ -11,6 +11,7 @@ const requestInterval = 1000;
 let start = 0;
 let end = 0;
 let timer: NodeJS.Timer;
+const service = new CompoundService();
 
 export default async function init(from: number, to: number) {
 	validateRange(from, to);
@@ -21,27 +22,32 @@ export default async function init(from: number, to: number) {
 	const pubChemService = new PubChemService();
 
 	timer = setInterval(async () => {
-		const requests: Promise<RawCompound>[] = [];
-		const endId = start + maxRequestPerInterval;
+		const requests: Promise<ParsedCompound>[] = [];
+		const endId = start + Math.min(end - start + 1, maxRequestPerInterval);
+
 		for (let id = start; id < endId; id++) {
-			const request = pubChemService.getRawCompoundById(id);
+			const request = pubChemService.getParsedCompoundById(id);
 			requests.push(request);
 		}
-		if (requests.length >= maxRequestPerInterval) {
+
+		if (requests.length > 0) {
 			makeRequests(requests);
 		}
+
 		start = endId;
+
 		// All completed, stop the timer
-		if (start === end) {
+		if (start >= end) {
 			clearTimeout(timer);
 		}
 	}, requestInterval);
 }
 
-const makeRequests = async (requests: Promise<RawCompound>[]) => {
+const makeRequests = async (requests: Promise<ParsedCompound>[]) => {
 	console.log(requests); // intentional, to be remvoe later.
 	// const compoundService = new CompoundService();
-	//await Promise.all(requests);
+	const compounds = await Promise.all(requests);
+	service.createMany(compounds);
 	// TODO: execute all promises at once like above
 	// Import the data using compoundService
 	// Error log case, (later we can create a table)
