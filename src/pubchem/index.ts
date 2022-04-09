@@ -23,7 +23,7 @@ export default async function init(from: number, to: number) {
 	timer = setInterval(async () => {
 		const requests: Promise<RawCompound>[] = [];
 		const endId = start + maxRequestPerInterval;
-		for (let id = start; id <= endId; id++) {
+		for (let id = start; id < endId; id++) {
 			const request = pubChemService.getRawCompoundById(id);
 			requests.push(request);
 		}
