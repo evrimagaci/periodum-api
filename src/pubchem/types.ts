@@ -222,14 +222,14 @@ export interface ParsedCompound {
 	StabilityShelfLife: string[];
 	AutoignitionTemperature: string[];
 	Decomposition: string[];
-	Viscosity: string;
+	Viscosity: string[];
 	Corrosivity: string[];
 	HeatofCombustion: string;
 	HeatofVaporization: string;
 	pH: string[];
 	SurfaceTension: string;
 	IonizationPotential: string;
-	Polymerization: string;
+	Polymerization: string[];
 	OdorThreshold: string[];
 	RefractiveIndex: string[];
 	DissociationConstants: string;

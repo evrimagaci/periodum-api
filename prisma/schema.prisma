@@ -299,14 +299,14 @@ model Compounds {
   StabilityShelfLife             String[] @map("stability_shelf_life") @db.Text
   AutoignitionTemperature        String[] @map("autoignition_temperature") @db.Text
   Decomposition                  String[] @map("decomposition") @db.Text
-  Viscosity                      String?  @map("viscosity") @db.Text
+  Viscosity                      String[] @map("viscosity") @db.Text
   Corrosivity                    String[] @map("corrosivity") @db.Text
   HeatofCombustion               String?  @map("heat_of_combustion") @db.Text
   HeatofVaporization             String?  @map("heat_of_vaporization") @db.Text
   pH                             String[] @map("ph") @db.Text
   SurfaceTension                 String?  @map("surface_tension") @db.Text
   IonizationPotential            String?  @map("ionization_potential") @db.Text
-  Polymerization                 String?  @map("polymerization") @db.Text
+  Polymerization                 String[] @map("polymerization") @db.Text
   OdorThreshold                  String[] @map("odor_threshold") @db.Text
   RefractiveIndex                String[] @map("refractive_index") @db.Text
   DissociationConstants          String[] @map("dissociation_constants") @db.Text
