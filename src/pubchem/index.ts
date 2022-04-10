@@ -40,6 +40,7 @@ export default async function init(from: number, to: number) {
 			//requesting raw data to prevent possible failed requests to parser script
 			const request = pubChemService.getRawCompoundById(id);
 			requests.push(request);
+			console.log("Pending to be request's compound id: ", id);
 		}
 
 		makeRequests(requests);
@@ -55,17 +56,17 @@ export default async function init(from: number, to: number) {
 
 const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
 	//eslint-disable-next-line no-console
-	console.log(requests); // intentional, to be remvoe later.
-	// const compoundService = new CompoundService();
 	const responses = await Promise.all(requests).then((results) => {
 		return results.map((res) => {
 			if (typeof res === 'number') {
 				//TODO these ids may be pushed to an array and should remake a request to pubchem
 				//eslint-disable-next-line no-console
-				console.log('fail id', res);
+				console.log('😫FAILED Compound ID:', res);
 				return res;
 			} else {
-				return pubChemService.parseData(res);
+				const compound = pubChemService.parseData(res);
+				console.log('Completed compound id: ', compound.id);
+				return compound;
 			}
 		});
 	});

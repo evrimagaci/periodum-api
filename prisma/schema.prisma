@@ -259,9 +259,9 @@ model Compounds {
   ICSCNumber                     String?  @map("icsc_number") @db.Text
   RTECSNumber                    String[] @map("rtecs_number") @db.Text
   UNNumber                       String[] @map("un_number") @db.Text
-  UNII                           String?  @map("unii") @db.Text
+  UNII                           String[] @map("unii") @db.Text
   FEMANumber                     Int?     @map("fema_number")
-  DSSToxSubstanceID              String?  @map("dss_tox_substance_id") @db.Text
+  DSSToxSubstanceID              String[] @map("dss_tox_substance_id") @db.Text
   Wikipedia                      String[] @map("wikipedia") @db.Text
   NCIThesaurusCode               String?  @map("nci_thesaurus_code") @db.Text
   MolecularWeight                Float?   @map("molecular_weight")
@@ -305,7 +305,7 @@ model Compounds {
   HeatofVaporization             String?  @map("heat_of_vaporization") @db.Text
   pH                             String[] @map("ph") @db.Text
   SurfaceTension                 String?  @map("surface_tension") @db.Text
-  IonizationPotential            String?  @map("ionization_potential") @db.Text
+  IonizationPotential            String[] @map("ionization_potential") @db.Text
   Polymerization                 String[] @map("polymerization") @db.Text
   OdorThreshold                  String[] @map("odor_threshold") @db.Text
   RefractiveIndex                String[] @map("refractive_index") @db.Text
