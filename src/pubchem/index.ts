@@ -2,12 +2,27 @@ import PubChemService from './service';
 import CompoundService from '../services/compound.service';
 
 import { parseIntMap } from './utils';
-import { RawCompound } from './types';
+import { ParsedCompound, RawCompound } from './types';
 
 const [from, to] = process.argv.slice(2).map(parseIntMap);
 
-const notNumber = <T>(value: T | number): value is T => {
-	return typeof value === 'number' ? false : true;
+/**
+ * Splits given array by type number or ParsedCompound
+ * @param array
+ * @returns {compounds: ParsedCompound[], numbers: number[]}
+ */
+const splitArrayByType = (array: (number | ParsedCompound)[]) => {
+	const numbers: number[] = [],
+		compounds: ParsedCompound[] = [];
+
+	array.forEach((item) => {
+		if (typeof item === 'number') {
+			numbers.push(item);
+		} else {
+			compounds.push(item);
+		}
+	});
+	return { numbers, compounds };
 };
 
 const validateRange = (from: number, to: number) => {
@@ -71,8 +86,8 @@ const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
 		});
 	});
 
-	const compounds = responses.filter(notNumber);
-
+	const { compounds, numbers } = splitArrayByType(responses);
+	console.log('Fails', numbers);
 	await service.createMany(compounds);
 	// TODO: execute all promises at once like above
 	// Import the data using compoundService
