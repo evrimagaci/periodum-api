@@ -170,14 +170,14 @@ export interface ParsedCompound {
 	CAS: string[];
 	RelatedCAS: string[];
 	EuropeanCommunityNumber: string[];
-	ICSCNumber: string;
+	ICSCNumber: string[];
 	RTECSNumber: string[];
 	UNNumber: string[];
 	UNII: string;
 	FEMANumber: number;
-	DSSToxSubstanceID: string;
+	DSSToxSubstanceID: string[];
 	Wikipedia: string[];
-	NCIThesaurusCode: string;
+	NCIThesaurusCode: string[];
 	MolecularWeight: number;
 	CompoundIsCanonicalized: string;
 	XLogP3: number;

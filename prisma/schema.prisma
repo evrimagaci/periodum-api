@@ -256,14 +256,14 @@ model Compounds {
   CAS                            String[] @map("cas") @db.Text
   RelatedCAS                     String[] @map("related_cas") @db.Text
   EuropeanCommunityNumber        String[] @map("european_community_number") @db.Text
-  ICSCNumber                     String?  @map("icsc_number") @db.Text
+  ICSCNumber                     String[] @map("icsc_number") @db.Text
   RTECSNumber                    String[] @map("rtecs_number") @db.Text
   UNNumber                       String[] @map("un_number") @db.Text
   UNII                           String[] @map("unii") @db.Text
   FEMANumber                     Int?     @map("fema_number")
   DSSToxSubstanceID              String[] @map("dss_tox_substance_id") @db.Text
   Wikipedia                      String[] @map("wikipedia") @db.Text
-  NCIThesaurusCode               String?  @map("nci_thesaurus_code") @db.Text
+  NCIThesaurusCode               String[] @map("nci_thesaurus_code") @db.Text
   MolecularWeight                Float?   @map("molecular_weight")
   CompoundIsCanonicalized        String?  @map("compound_is_canonicalized") @db.Text
   XLogP3                         Float?   @map("xlogp3")
