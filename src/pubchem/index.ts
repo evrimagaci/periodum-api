@@ -4,6 +4,7 @@ import CompoundService from '../services/compound.service';
 import { parseIntMap } from './utils';
 import { ParsedCompound, RawCompound } from './types';
 
+import Limiter from './limiter';
 const [from, to] = process.argv.slice(2).map(parseIntMap);
 
 /**
@@ -34,12 +35,16 @@ const validateRange = (from: number, to: number) => {
 };
 
 const maxRequestPerInterval = 5;
-const requestInterval = 1000;
+const requestInterval = 500;
+
 let start = 0;
 let end = 0;
-let timer: NodeJS.Timer;
+// let timer: NodeJS.Timer;
+let fails: number[] = [];
+
 const service = new CompoundService();
 const pubChemService = new PubChemService();
+const limiter = new Limiter(requestInterval);
 
 export default async function init(from: number, to: number) {
 	validateRange(from, to);
@@ -47,7 +52,7 @@ export default async function init(from: number, to: number) {
 	start = from;
 	end = to;
 
-	timer = setInterval(async () => {
+	limiter.limit(async () => {
 		const requests: Promise<RawCompound | number>[] = [];
 		const endId = start + Math.min(end - start + 1, maxRequestPerInterval);
 
@@ -64,9 +69,9 @@ export default async function init(from: number, to: number) {
 
 		// All completed, stop the timer
 		if (start >= end) {
-			clearTimeout(timer);
+			limiter.stop();
 		}
-	}, requestInterval);
+	});
 }
 
 const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
@@ -88,10 +93,13 @@ const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
 
 	const { compounds, numbers } = splitArrayByType(responses);
 	console.log('Fails', numbers);
+	fails = [...fails, ...numbers];
 	await service.createMany(compounds);
 	// TODO: execute all promises at once like above
 	// Import the data using compoundService
 	// Error log case, (later we can create a table)
 };
+
+// const retry = async () => {};
 
 init(from, to);
