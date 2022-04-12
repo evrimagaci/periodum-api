@@ -36,7 +36,7 @@ const validateRange = (from: number, to: number) => {
 
 const maxRequestPerInterval = 5;
 //Lower requestInterval to something like 500 ms to test fail cases. Don't lower it too much to avoid ban from Pubhem
-const requestInterval = 1000;
+const requestInterval = 500;
 
 let successCount = 0;
 let ids: number[];
@@ -56,7 +56,7 @@ const checkForFails = () => {
 
 		return true;
 	}
-
+	console.timeEnd('PubChem');
 	return false;
 };
 
@@ -69,6 +69,7 @@ const updateSuccessCount = (val: number) => {
 };
 
 export default async function init(from: number, to: number) {
+	console.time('PubChem');
 	validateRange(from, to);
 	ids = new Array(to - from + 1).fill(0).map((_, i) => i + from);
 	throttle();

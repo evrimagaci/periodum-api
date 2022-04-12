@@ -295,16 +295,16 @@ model Compounds {
   VaporPressure                  String[] @map("vapor_pressure") @db.Text
   LogP                           String[] @map("logp") @db.Text
   HenrysLawConstant              String[] @map("henrys_law_constant") @db.Text
-  AtmosphericOHRateConstant      String?  @map("atmospheric_oh_rate_constant") @db.Text
+  AtmosphericOHRateConstant      String[] @map("atmospheric_oh_rate_constant") @db.Text
   StabilityShelfLife             String[] @map("stability_shelf_life") @db.Text
   AutoignitionTemperature        String[] @map("autoignition_temperature") @db.Text
   Decomposition                  String[] @map("decomposition") @db.Text
   Viscosity                      String[] @map("viscosity") @db.Text
   Corrosivity                    String[] @map("corrosivity") @db.Text
-  HeatofCombustion               String?  @map("heat_of_combustion") @db.Text
-  HeatofVaporization             String?  @map("heat_of_vaporization") @db.Text
+  HeatofCombustion               String[] @map("heat_of_combustion") @db.Text
+  HeatofVaporization             String[] @map("heat_of_vaporization") @db.Text
   pH                             String[] @map("ph") @db.Text
-  SurfaceTension                 String?  @map("surface_tension") @db.Text
+  SurfaceTension                 String[] @map("surface_tension") @db.Text
   IonizationPotential            String[] @map("ionization_potential") @db.Text
   Polymerization                 String[] @map("polymerization") @db.Text
   OdorThreshold                  String[] @map("odor_threshold") @db.Text
