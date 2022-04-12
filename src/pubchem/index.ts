@@ -35,7 +35,8 @@ const validateRange = (from: number, to: number) => {
 };
 
 const maxRequestPerInterval = 5;
-const requestInterval = 500;
+//Lower requestInterval to something like 500 ms to test fail cases. Don't lower it too much to avoid ban from Pubhem
+const requestInterval = 1000;
 
 let successCount = 0;
 let ids: number[];
