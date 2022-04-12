@@ -174,7 +174,7 @@ export interface ParsedCompound {
 	RTECSNumber: string[];
 	UNNumber: string[];
 	UNII: string;
-	FEMANumber: number;
+	FEMANumber: number[];
 	DSSToxSubstanceID: string[];
 	Wikipedia: string[];
 	NCIThesaurusCode: string[];
