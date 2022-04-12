@@ -37,42 +37,56 @@ const validateRange = (from: number, to: number) => {
 const maxRequestPerInterval = 5;
 const requestInterval = 500;
 
-let start = 0;
-let end = 0;
-// let timer: NodeJS.Timer;
+let successCount = 0;
+let ids: number[];
 let fails: number[] = [];
 
 const service = new CompoundService();
 const pubChemService = new PubChemService();
 const limiter = new Limiter(requestInterval);
 
+const checkForFails = () => {
+	if (fails.length) {
+		console.log('These ids were failed to fetch', fails);
+		console.log('Retrying...');
+		ids = [...fails];
+		fails = [];
+		successCount = 0;
+
+		return true;
+	}
+
+	return false;
+};
+
+const updateSuccessCount = (val: number) => {
+	successCount += val;
+	if (successCount + fails.length === ids.length) {
+		console.log('All requests are resolved!');
+		checkForFails() ? throttle() : console.log('No fails');
+	}
+};
+
 export default async function init(from: number, to: number) {
 	validateRange(from, to);
+	ids = new Array(to - from + 1).fill(0).map((_, i) => i + from);
+	throttle();
+}
 
-	start = from;
-	end = to;
-
+const throttle = () => {
+	const idsToRequest = [...ids];
 	limiter.limit(async () => {
-		const requests: Promise<RawCompound | number>[] = [];
-		const endId = start + Math.min(end - start + 1, maxRequestPerInterval);
+		const requests = idsToRequest
+			.splice(0, maxRequestPerInterval)
+			.map((id) => pubChemService.getRawCompoundById(id));
 
-		for (let id = start; id < endId; id++) {
-			//requesting raw data to prevent possible failed requests to parser script
-			const request = pubChemService.getRawCompoundById(id);
-			requests.push(request);
-			console.log("Pending to be request's compound id: ", id);
+		if (idsToRequest.length === 0) {
+			limiter.stop();
 		}
 
 		makeRequests(requests);
-
-		start = endId;
-
-		// All completed, stop the timer
-		if (start >= end) {
-			limiter.stop();
-		}
 	});
-}
+};
 
 const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
 	//eslint-disable-next-line no-console
@@ -92,8 +106,11 @@ const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
 	});
 
 	const { compounds, numbers } = splitArrayByType(responses);
-	console.log('Fails', numbers);
+	if (numbers.length) {
+		console.log('Fails', numbers);
+	}
 	fails = [...fails, ...numbers];
+	updateSuccessCount(compounds.length);
 	await service.createMany(compounds);
 	// TODO: execute all promises at once like above
 	// Import the data using compoundService
