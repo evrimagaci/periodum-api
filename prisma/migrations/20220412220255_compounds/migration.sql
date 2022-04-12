@@ -17,7 +17,7 @@ CREATE TABLE "Compounds" (
     "rtecs_number" TEXT[],
     "un_number" TEXT[],
     "unii" TEXT[],
-    "fema_number" INTEGER,
+    "fema_number" INTEGER[],
     "dss_tox_substance_id" TEXT[],
     "wikipedia" TEXT[],
     "nci_thesaurus_code" TEXT[],
