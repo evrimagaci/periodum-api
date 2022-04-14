@@ -5,7 +5,7 @@
 	"main": "dist/app.js",
 	"scripts": {
 		"prepare": "husky install",
-		"lint": "eslint --ext .ts src",
+		"lint": "eslint . --ext .ts",
 		"lint-fix": "eslint . --ext .ts --fix",
 		"prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
 		"dev": "nodemon --config nodemon.json src/app.ts",
