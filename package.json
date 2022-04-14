@@ -5,7 +5,7 @@
 	"main": "dist/app.js",
 	"scripts": {
 		"prepare": "husky install",
-		"lint": "eslint . --ext .ts",
+		"lint": "eslint --ext .ts src",
 		"lint-fix": "eslint . --ext .ts --fix",
 		"prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
 		"dev": "nodemon --config nodemon.json src/app.ts",
@@ -25,7 +25,8 @@
 	},
 	"dependencies": {
 		"@appsignal/express": "^1.0.26",
-		"@appsignal/nodejs": "^2.3.2",
+		"@appsignal/nodejs": "^2.3.4",
+		"@octokit/rest": "^18.12.0",
 		"@prisma/client": "^3.11.0",
 		"express": "^4.17.2"
 	},
