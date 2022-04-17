@@ -1,6 +1,6 @@
+/* eslint-disable no-console*/
 import PubChemService from './service';
 import CompoundService from '../services/compound.service';
-
 import { parseIntMap } from './utils';
 import { ParsedCompound, RawCompound } from './types';
 
@@ -35,16 +35,18 @@ const validateRange = (from: number, to: number) => {
 };
 
 const maxRequestPerInterval = 5;
-//Lower requestInterval to something like 500 ms to test fail cases. Don't lower it too much to avoid ban from Pubhem
-const requestInterval = 500;
+const requestInterval = 400;
 
 let successCount = 0;
 let ids: number[];
 let fails: number[] = [];
 
 const service = new CompoundService();
-const pubChemService = new PubChemService();
 const limiter = new Limiter(requestInterval);
+const pubChemService = new PubChemService({
+	changeInterval: limiter.changeInterval.bind(limiter),
+	interval: requestInterval
+});
 
 const checkForFails = () => {
 	if (fails.length) {
@@ -56,7 +58,6 @@ const checkForFails = () => {
 
 		return true;
 	}
-	console.timeEnd('PubChem');
 	return false;
 };
 
@@ -91,12 +92,10 @@ const throttle = () => {
 };
 
 const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
-	//eslint-disable-next-line no-console
 	const responses = await Promise.all(requests).then((results) => {
 		return results.map((res) => {
 			if (typeof res === 'number') {
 				//TODO these ids may be pushed to an array and should remake a request to pubchem
-				//eslint-disable-next-line no-console
 				console.log('😫FAILED Compound ID:', res);
 				return res;
 			} else {
@@ -118,7 +117,5 @@ const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
 	// Import the data using compoundService
 	// Error log case, (later we can create a table)
 };
-
-// const retry = async () => {};
 
 init(from, to);

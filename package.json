@@ -13,7 +13,8 @@
 		"start": "NODE_ENV=production node dist/app.js",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"postinstall": "prisma generate"
+		"postinstall": "prisma generate",
+		"import": "ts-node src/pubchem/index.ts"
 	},
 	"husky": {
 		"hooks": {

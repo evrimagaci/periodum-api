@@ -38,7 +38,7 @@ CREATE TABLE "Compounds" (
     "undefined_atom_stereocenter_count" INTEGER,
     "defined_bond_stereocenter_count" INTEGER,
     "undefined_bond_stereocenter_count" INTEGER,
-    "covalently-bonded_unit_count" INTEGER,
+    "covalently_bonded_unit_count" INTEGER,
     "physical_description" TEXT[],
     "color_form" TEXT[],
     "odor" TEXT[],

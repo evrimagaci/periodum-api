@@ -281,7 +281,7 @@ model Compounds {
   UndefinedAtomStereocenterCount Int?     @map("undefined_atom_stereocenter_count")
   DefinedBondStereocenterCount   Int?     @map("defined_bond_stereocenter_count")
   UndefinedBondStereocenterCount Int?     @map("undefined_bond_stereocenter_count")
-  CovalentlyBondedUnitCount      Int?     @map("covalently-bonded_unit_count")
+  CovalentlyBondedUnitCount      Int?     @map("covalently_bonded_unit_count")
   PhysicalDescription            String[] @map("physical_description") @db.Text
   ColorForm                      String[] @map("color_form") @db.Text
   Odor                           String[] @map("odor") @db.Text

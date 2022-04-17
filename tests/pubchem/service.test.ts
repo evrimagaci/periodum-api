@@ -11,7 +11,11 @@ jest.mock('axios', () => {
 	};
 });
 
-const service = new PubChemService();
+const service = new PubChemService({
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	changeInterval: () => {},
+	interval: 1000
+});
 const noData = undefined;
 
 describe('PubChem API Tests', () => {

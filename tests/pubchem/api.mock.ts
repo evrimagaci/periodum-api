@@ -12,5 +12,5 @@ export const getCompoundById = (url: string): AxiosResponse => {
 function getCompound(id: number) {
 	const filePath = path.resolve(`tests/pubchem/fixtures/${id}.json`);
 	const data = readFileSync(filePath, 'utf8');
-	return { data: JSON.parse(data) } as AxiosResponse;
+	return { data: JSON.parse(data), headers: {} } as AxiosResponse;
 }
