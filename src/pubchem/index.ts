@@ -70,7 +70,6 @@ const updateSuccessCount = (val: number) => {
 };
 
 export default async function init(from: number, to: number) {
-	console.time('PubChem');
 	validateRange(from, to);
 	ids = new Array(to - from + 1).fill(0).map((_, i) => i + from);
 	throttle();
@@ -113,9 +112,9 @@ const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
 	fails = [...fails, ...numbers];
 	updateSuccessCount(compounds.length);
 	await service.createMany(compounds);
-	// TODO: execute all promises at once like above
-	// Import the data using compoundService
 	// Error log case, (later we can create a table)
 };
 
-init(from, to);
+if (from && to) {
+	init(from, to);
+}

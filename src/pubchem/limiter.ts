@@ -1,15 +1,15 @@
 export default class Limiter {
 	private requestInterval: number;
 	private interval!: NodeJS.Timer;
-	private callbackToLimit!: () => void;
+	private callback!: () => void;
 
 	constructor(requestInterval: number) {
 		this.requestInterval = requestInterval;
 	}
 
 	public async limit(fn: () => void) {
-		this.callbackToLimit = fn;
-		this.interval = setInterval(this.callbackToLimit, this.requestInterval);
+		this.callback = fn;
+		this.interval = setInterval(this.callback, this.requestInterval);
 	}
 
 	public stop() {
@@ -21,7 +21,7 @@ export default class Limiter {
 			console.log('Changing interval to', requestInterval);
 			this.requestInterval = requestInterval;
 			this.stop();
-			this.limit(this.callbackToLimit);
+			this.limit(this.callback);
 		}
 	}
 }
