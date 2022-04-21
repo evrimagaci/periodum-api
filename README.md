@@ -85,3 +85,6 @@ Please follow the same [guidelines](https://github.com/evrimagaci/periodum/blob/
 - Work on your new branch
 - To avoid working on the same issue; after very first commit, please create a **draft** pull request to our `develop` so other contributors will know that you're working on the issue. _Other contributors might give you early feedback on your implementation for saving time_
 - When it's ready, change the PR to "Ready to Review"
+
+### Contact
+Feel free to join our Discord chat. After join [Evrim Ağaçı](https://discord.com/invite/evrimagaci)'s server, find us on [Periodum](https://discord.com/channels/490265973178499102/963708301051330630) channels. 
