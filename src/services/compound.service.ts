@@ -8,13 +8,15 @@ class CompoundService {
 		this.prisma = new PrismaClient();
 	}
 
-	getAll = async () => {
+	getLatest = async (pageIndex: number, pageSize: number) => {
 		return this.prisma.compounds.findMany({
 			select: {
 				id: true,
 				RecordTitle: true,
 				IUPACName: true
 			},
+			skip: pageIndex * pageSize,
+			take: pageSize,
 			orderBy: {
 				id: 'asc'
 			}

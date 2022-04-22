@@ -11,7 +11,10 @@ class CompoundController extends BaseController {
 
 	getCompounds = async (_: Request, res: Response) => {
 		try {
-			const compounds = await this.service.getAll();
+			const pageIndex = 0;
+			const pageSize = 10;
+			// TODO: Until specs arrive we keep this hardcoded.
+			const compounds = await this.service.getLatest(pageIndex, pageSize);
 			return this.success(res, compounds);
 		} catch (e) {
 			return this.error(res, e as Error);
