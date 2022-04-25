@@ -1,6 +1,6 @@
 import PubChemApi from './api';
 import { RawCompound, ParsedCompound } from './types';
-import getNecessaryData from './parseData';
+import getNecessaryData from './parser';
 import { AxiosResponseHeaders } from 'axios';
 
 interface ServerStatus {
