@@ -1,5 +1,6 @@
 import { Express, Request, Response, NextFunction } from 'express';
 import ElementController from './controllers/element.controller';
+import GithubController from './controllers/github.controller';
 import { expressMiddleware, expressErrorHandler } from '@appsignal/express';
 import { Appsignal } from '@appsignal/nodejs';
 
@@ -8,6 +9,7 @@ export default function (app: Express, appsignal: Appsignal) {
 	app.use(expressMiddleware(appsignal));
 
 	const elementController = new ElementController();
+	const githubController = new GithubController();
 
 	app.get('/', (_, res: Response) => {
 		res.status(200).json({ message: 'Hello from Periodum API!' });
@@ -15,6 +17,7 @@ export default function (app: Express, appsignal: Appsignal) {
 
 	app.get('/elements', elementController.getElements);
 	app.get('/elements/:id', elementController.getElementById);
+	app.get('/contributors', githubController.getContributors);
 
 	httpsRedirection(app);
 
