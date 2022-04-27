@@ -2,6 +2,7 @@ import PubChemApi from './api';
 import { RawCompound, ParsedCompound } from './types';
 import getNecessaryData from './parser';
 import { AxiosResponseHeaders } from 'axios';
+import { log } from './utils';
 
 interface ServerStatus {
 	count: number;
@@ -53,7 +54,7 @@ class PubChemService {
 
 	private calculateThrottle(val: number, coefficient = 1, stepPercentage = 5) {
 		if (val > this.alertPercentage) {
-			console.log('\n->Throttling for', val, '\n');
+			log.debug('\n->Throttling for', val, '\n');
 		}
 		const step = Math.max(
 			Math.floor((val - this.alertPercentage) / stepPercentage + 1),
@@ -94,12 +95,12 @@ class PubChemService {
 		if (maxDelta !== this.currentInterval) {
 			this.currentInterval = maxDelta;
 			this.changeInterval(this.currentInterval);
-			console.log('\n->time, count, status', [
+			log.debug('\n->time, count, status', [
 				deltaTime,
 				deltaCount,
 				deltaStatus
 			]);
-			console.log('->Interval changed to: ', this.currentInterval, '\n');
+			log.debug('->Interval changed to: ', this.currentInterval, '\n');
 		}
 	}
 

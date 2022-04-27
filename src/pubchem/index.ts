@@ -1,7 +1,7 @@
 /* eslint-disable no-console*/
 import PubChemService from './service';
 import CompoundService from '../services/compound.service';
-import { parseIntMap } from './utils';
+import { log, parseIntMap } from './utils';
 import { ParsedCompound, RawCompound } from './types';
 
 import Limiter from './limiter';
@@ -95,7 +95,7 @@ const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
 		return results.map((res) => {
 			if (typeof res === 'number') {
 				//TODO these ids may be pushed to an array and should remake a request to pubchem
-				console.log('😫FAILED Compound ID:', res);
+				log.error('😫FAILED Compound ID:', res);
 				return res;
 			} else {
 				const compound = pubChemService.parseData(res);
@@ -107,7 +107,7 @@ const makeRequests = async (requests: Promise<RawCompound | number>[]) => {
 
 	const { compounds, numbers } = splitArrayByType(responses);
 	if (numbers.length) {
-		console.log('Fails', numbers);
+		log.error('Fails', numbers);
 	}
 	fails = [...fails, ...numbers];
 	updateSuccessCount(compounds.length);

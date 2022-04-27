@@ -1,3 +1,5 @@
+import { log } from './utils';
+
 export default class Limiter {
 	private requestInterval: number;
 	private interval!: NodeJS.Timer;
@@ -18,7 +20,7 @@ export default class Limiter {
 
 	changeInterval(requestInterval: number) {
 		if (this.requestInterval !== requestInterval) {
-			console.log('Changing interval to', requestInterval);
+			log.debug('Changing interval to', requestInterval);
 			this.requestInterval = requestInterval;
 			this.stop();
 			this.limit(this.callback);
