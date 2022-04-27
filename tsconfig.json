@@ -3,14 +3,18 @@
 		"src/app.ts",
 	],
 	"exclude": [
-		"test"
+		"./node_modules/",
+		"./dist/",
+		"coverage"
 	],
 	"compilerOptions": {
 		"strict": true,
 		"target": "es2016",
+		"types": [
+			"node",
+			"jest"
+		],
 		"outDir": "./dist",
-		"rootDir": "./src",
-		"baseUrl": "./src",
 		"module": "commonjs", /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
 		"moduleResolution": "node",
 		"esModuleInterop": true,
@@ -24,5 +28,6 @@
 		"noFallthroughCasesInSwitch": true, /* Enable error reporting for fallthrough cases in switch statements. */
 		"noImplicitOverride": true, /* Ensure overriding members in derived classes are marked with an override modifier. */
 		"allowUnreachableCode": false, /* Disable error reporting for unreachable code. */
+		"removeComments": true,
 	}
 }

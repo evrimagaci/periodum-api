@@ -1,6 +1,7 @@
 dist/
 node_modules/
 db/
+coverage/
 
 *.DS_Store
 .env
